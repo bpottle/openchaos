@@ -7,34 +7,80 @@ interface PRCardProps {
 
 export function PRCard({ pr, rank }: PRCardProps) {
   return (
-    <a
-      href={pr.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block w-full p-4 rounded-lg border border-zinc-200 hover:border-zinc-400 transition-colors"
+    <table 
+      width="100%" 
+      border="2" 
+      cellPadding="8" 
+      cellSpacing="0" 
+      bgcolor={rank === 1 ? "#ffff00" : "#ffffff"}
+      style={{ 
+        borderColor: rank === 1 ? "#ff0000" : "#0000ff",
+        marginBottom: '10px',
+        fontFamily: 'Comic Sans MS, cursive'
+      }}
     >
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2">
-            <span className="text-zinc-500 text-sm">#{pr.number}</span>
+      <tbody>
+        <tr>
+          <td bgcolor={rank === 1 ? "#ffcc00" : "#ccccff"} align="center" width="15%">
+            <font size="4" color={rank === 1 ? "#ff0000" : "#0000ff"} face="Comic Sans MS">
+              <b>#{pr.number}</b>
+            </font>
             {rank === 1 && (
-              <span className="px-1.5 py-0.5 text-xs font-medium bg-amber-100 text-amber-700 rounded">
-                LEADING
-              </span>
+              <div style={{ marginTop: '5px' }}>
+                <font size="2" color="#ff0000" face="Arial">
+                  <b>⭐ LEADING ⭐</b>
+                </font>
+              </div>
             )}
-          </div>
-          <h3 className="mt-1 font-medium truncate">{pr.title}</h3>
-          <p className="mt-1 text-sm text-zinc-500">by @{pr.author}</p>
-        </div>
-        <div className="flex items-center gap-1.5 text-lg font-medium">
-          <span>👍</span>
-          <span>{pr.votes}</span>
-        </div>
-      </div>
-      <div className="mt-3 text-sm text-zinc-500 flex items-center gap-1">
-        View &amp; Vote on GitHub
-        <span aria-hidden="true">→</span>
-      </div>
-    </a>
+          </td>
+          <td bgcolor={rank === 1 ? "#ffffcc" : "#f0f0ff"} style={{ padding: '10px' }}>
+            <table width="100%" border="0" cellPadding="0" cellSpacing="0">
+              <tbody>
+                <tr>
+                  <td>
+                    <font size="3" face="Comic Sans MS" color="#000000">
+                      <b>{pr.title}</b>
+                    </font>
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{ paddingTop: '5px' }}>
+                    <font size="2" face="Arial" color="#666666">
+                      by <b>@{pr.author}</b>
+                    </font>
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{ paddingTop: '8px' }}>
+                    <a
+                      href={pr.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ 
+                        color: '#0000ff', 
+                        textDecoration: 'underline',
+                        fontFamily: 'Arial',
+                        fontSize: '12px'
+                      }}
+                    >
+                      <b>[View &amp; Vote on GitHub →]</b>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+          <td bgcolor={rank === 1 ? "#ffcc00" : "#ccffcc"} align="center" width="15%">
+            <font size="5" face="Arial">
+              👍
+            </font>
+            <br />
+            <font size="4" color={rank === 1 ? "#ff0000" : "#006600"} face="Comic Sans MS">
+              <b>{pr.votes}</b>
+            </font>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   );
 }

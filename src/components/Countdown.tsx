@@ -58,21 +58,51 @@ export function Countdown() {
 
   if (!mounted) {
     return (
-      <div className="text-center">
-        <div className="text-5xl sm:text-7xl font-mono font-bold tracking-tight">
-          --d --h --m --s
-        </div>
-        <p className="mt-4 text-zinc-500 text-lg">until next merge</p>
-      </div>
+      <table border="3" cellPadding="15" bgcolor="#ff00ff" style={{ borderColor: '#ffff00' }}>
+        <tbody>
+          <tr>
+            <td align="center">
+              <font size="7" color="#00ff00" face="Courier New">
+                <b>--d --h --m --s</b>
+              </font>
+              <br />
+              <font size="3" color="#ffff00" face="Comic Sans MS">
+                <b>⏰ until next merge ⏰</b>
+              </font>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     );
   }
 
   return (
-    <div className="text-center">
-      <div className="text-5xl sm:text-7xl font-mono font-bold tracking-tight">
-        {time.days}d {pad(time.hours)}h {pad(time.minutes)}m {pad(time.seconds)}s
-      </div>
-      <p className="mt-4 text-zinc-400 text-lg">until next merge</p>
-    </div>
+    <table border="3" cellPadding="15" bgcolor="#ff00ff" style={{ borderColor: '#ffff00' }}>
+      <tbody>
+        <tr>
+          <td align="center">
+            <font size="7" color="#00ff00" face="Courier New">
+              <b className="blink-countdown">
+                {time.days}d {pad(time.hours)}h {pad(time.minutes)}m {pad(time.seconds)}s
+              </b>
+            </font>
+            <br />
+            <font size="3" color="#ffff00" face="Comic Sans MS">
+              <b>⏰ until next merge ⏰</b>
+            </font>
+          </td>
+        </tr>
+      </tbody>
+      <style jsx>{`
+        @keyframes blink-countdown {
+          0%, 50% { opacity: 1; }
+          51%, 100% { opacity: 0.7; }
+        }
+        
+        .blink-countdown {
+          animation: blink-countdown 1s infinite;
+        }
+      `}</style>
+    </table>
   );
 }
