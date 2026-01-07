@@ -80,7 +80,7 @@
 }
 
 .ie6-footer-cell {
-  background-color: #00ff00;
+  background-color: #ff00ff;
   text-align: center;
 }
 
@@ -90,19 +90,19 @@
 }
 
 .ie6-footer-link a {
-  color: #0000ff;
+  color: #ffff00;
   text-decoration: underline;
 }
 
 .ie6-visitor-text {
   font-size: 12px;
-  color: #666666;
+  color: #000000;
   font-family: 'Courier New';
 }
 
 .ie6-warning-text {
   font-size: 12px;
-  color: #ff0000;
+  color: #ffff00;
   font-family: 'Comic Sans MS';
 }
 
@@ -111,13 +111,14 @@
 }
 
 .ie6-bottom-banner {
-  background-color: #000000;
+  background-color: #00ffff;
 }
 
 .ie6-bottom-banner-text {
-  color: #00ff00;
+  color: #0000ff;
   font-family: 'Courier New';
   font-size: 14px;
+  font-weight: bold;
 }
 
 /* ===== PAGE.TSX COMPONENT ===== */
@@ -447,4 +448,44 @@
 .guestbook-close-button:hover {
   background-color: #ff6666;
   color: #ffffff;
+}
+
+/* ===== WEBCOUNTER COMPONENT ===== */
+.webcounter-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.webcounter-table {
+  margin: 0 auto;
+  background-color: #ff00ff;
+  border-color: #ffff00;
+}
+
+.webcounter-header-cell {
+  background-color: #ffff00;
+  text-align: center;
+  padding: 5px;
+}
+
+.webcounter-header-text {
+  font-size: 14px;
+  color: #ff0000;
+  font-family: 'Comic Sans MS', cursive;
+  font-weight: bold;
+}
+
+.webcounter-digit-cell {
+  background-color: #0000ff;
+  text-align: center;
+  padding: 8px;
+  border: 2px inset #ffffff;
+}
+
+.webcounter-digit-text {
+  font-size: 28px;
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  text-shadow: 2px 2px #000000;
 }

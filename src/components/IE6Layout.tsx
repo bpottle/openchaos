@@ -86,7 +86,7 @@ export function IE6Layout({ children }: IE6LayoutProps) {
                       <td className="ie6-footer-cell">
                         <span className="ie6-visitor-text">
                           {/* @ts-expect-error marquee is deprecated but used for retro styling */}
-                          <marquee scrollamount="3" width="60%">
+                          <marquee scrollamount="3">
                             👾 Last updated: {new Date().toLocaleDateString()} 👾 Webmaster: skridlevsky@geocities.com 👾
                           {/* @ts-expect-error marquee is deprecated but used for retro styling */}
                           </marquee>
