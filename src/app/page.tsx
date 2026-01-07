@@ -11,31 +11,31 @@ export default function Home() {
       <Countdown />
       
       <div style={{ marginTop: '20px' }}>
-        <table width="100%" border="2" cellPadding="15" cellSpacing="0" style={{ borderColor: '#ff00ff' }}>
+        <table width="100%" border={2} cellPadding={15} cellSpacing={0} style={{ borderColor: '#ff00ff' }}>
           <tbody>
             <tr>
-              <td bgcolor="#ffccff" align="center">
-                <font size="5" color="#0000ff" face="Comic Sans MS">
+              <td style={{ backgroundColor: '#ffccff', textAlign: 'center' }}>
+                <span style={{ fontSize: '24px', color: '#0000ff', fontFamily: 'Comic Sans MS' }}>
                   <b>
                     <span className="blink-text">✨ OPEN PRS - VOTE TO MERGE ✨</span>
                   </b>
-                </font>
+                </span>
               </td>
             </tr>
             <tr>
-              <td bgcolor="#ffffcc" style={{ padding: '20px' }}>
+              <td style={{ backgroundColor: '#ffffcc', padding: '20px' }}>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                   <Suspense
                     fallback={
-                      <table width="90%" border="1" cellPadding="10" bgcolor="#ccffcc" style={{ maxWidth: '600px' }}>
+                      <table width="90%" border={1} cellPadding={10} style={{ backgroundColor: '#ccffcc', maxWidth: '600px' }}>
                         <tbody>
                           <tr>
-                            <td align="center">
-                              <font color="#006600" face="Arial">
+                            <td style={{ textAlign: 'center' }}>
+                              <span style={{ color: '#006600', fontFamily: 'Arial' }}>
                                 <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%23ffff00' stroke='%23000' stroke-width='2'/%3E%3C/svg%3E" alt="Loading..." style={{ animation: 'spin 2s linear infinite' }} />
                                 <br />
                                 <b>Loading PRs... Please Wait...</b>
-                              </font>
+                              </span>
                             </td>
                           </tr>
                         </tbody>

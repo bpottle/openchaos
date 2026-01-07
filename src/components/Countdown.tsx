@@ -58,17 +58,17 @@ export function Countdown() {
 
   if (!mounted) {
     return (
-      <table border="3" cellPadding="15" bgcolor="#ff00ff" style={{ borderColor: '#ffff00' }}>
+      <table border={3} cellPadding={15} style={{ backgroundColor: '#ff00ff', borderColor: '#ffff00' }}>
         <tbody>
           <tr>
-            <td align="center">
-              <font size="7" color="#00ff00" face="Courier New">
+            <td style={{ textAlign: 'center' }}>
+              <span style={{ fontSize: '36px', color: '#00ff00', fontFamily: 'Courier New' }}>
                 <b>--d --h --m --s</b>
-              </font>
+              </span>
               <br />
-              <font size="3" color="#ffff00" face="Comic Sans MS">
+              <span style={{ fontSize: '16px', color: '#ffff00', fontFamily: 'Comic Sans MS' }}>
                 <b>⏰ until next merge ⏰</b>
-              </font>
+              </span>
             </td>
           </tr>
         </tbody>
@@ -77,19 +77,19 @@ export function Countdown() {
   }
 
   return (
-    <table border="3" cellPadding="15" bgcolor="#ff00ff" style={{ borderColor: '#ffff00' }}>
+    <table border={3} cellPadding={15} style={{ backgroundColor: '#ff00ff', borderColor: '#ffff00' }}>
       <tbody>
         <tr>
-          <td align="center">
-            <font size="7" color="#00ff00" face="Courier New">
+          <td style={{ textAlign: 'center' }}>
+            <span style={{ fontSize: '36px', color: '#00ff00', fontFamily: 'Courier New' }}>
               <b className="blink-countdown">
                 {time.days}d {pad(time.hours)}h {pad(time.minutes)}m {pad(time.seconds)}s
               </b>
-            </font>
+            </span>
             <br />
-            <font size="3" color="#ffff00" face="Comic Sans MS">
+            <span style={{ fontSize: '16px', color: '#ffff00', fontFamily: 'Comic Sans MS' }}>
               <b>⏰ until next merge ⏰</b>
-            </font>
+            </span>
           </td>
         </tr>
       </tbody>
