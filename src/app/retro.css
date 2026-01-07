@@ -312,8 +312,8 @@
 
 /* ===== GUESTBOOK COMPONENT ===== */
 .guestbook-button {
-  background-color: #ff00ff;
-  color: #ffff00;
+  background-color: #00ffff;
+  color: #ff0000;
   border: 3px solid #0000ff;
   padding: 8px 16px;
   font-family: 'Comic Sans MS', cursive;
@@ -324,8 +324,8 @@
 }
 
 .guestbook-button:hover {
-  background-color: #ff66ff;
-  color: #ffffff;
+  background-color: #66ffff;
+  color: #ff0000;
 }
 
 .guestbook-modal-overlay {
