@@ -12,56 +12,46 @@ export function PRCard({ pr, rank }: PRCardProps) {
       border={2}
       cellPadding={8}
       cellSpacing={0}
-      style={{ 
-        backgroundColor: rank === 1 ? "#ffff00" : "#ffffff",
-        borderColor: rank === 1 ? "#ff0000" : "#0000ff",
-        marginBottom: '10px',
-        fontFamily: 'Comic Sans MS, cursive'
-      }}
+      className={`pr-card ${rank === 1 ? 'pr-card-leading' : 'pr-card-normal'}`}
     >
       <tbody>
         <tr>
-          <td style={{ backgroundColor: rank === 1 ? "#ffcc00" : "#ccccff", textAlign: 'center', width: '15%' }}>
-            <span style={{ fontSize: '20px', color: rank === 1 ? "#ff0000" : "#0000ff", fontFamily: 'Comic Sans MS' }}>
+          <td className={rank === 1 ? 'pr-card-number-cell-leading' : 'pr-card-number-cell-normal'}>
+            <span className={rank === 1 ? 'pr-card-number-text-leading' : 'pr-card-number-text-normal'}>
               <b>#{pr.number}</b>
             </span>
             {rank === 1 && (
-              <div style={{ marginTop: '5px' }}>
-                <span style={{ fontSize: '14px', color: '#ff0000', fontFamily: 'Arial' }}>
+              <div className="pr-card-leading-badge">
+                <span className="pr-card-leading-badge-text">
                   <b>⭐ LEADING ⭐</b>
                 </span>
               </div>
             )}
           </td>
-          <td style={{ backgroundColor: rank === 1 ? "#ffffcc" : "#f0f0ff", padding: '10px' }}>
+          <td className={rank === 1 ? 'pr-card-content-cell-leading' : 'pr-card-content-cell-normal'}>
             <table width="100%" border={0} cellPadding={0} cellSpacing={0}>
               <tbody>
                 <tr>
                   <td>
-                    <span style={{ fontSize: '16px', fontFamily: 'Comic Sans MS', color: '#000000' }}>
+                    <span className="pr-card-title">
                       <b>{pr.title}</b>
                     </span>
                   </td>
                 </tr>
                 <tr>
-                  <td style={{ paddingTop: '5px' }}>
-                    <span style={{ fontSize: '14px', fontFamily: 'Arial', color: '#666666' }}>
+                  <td className="pr-card-author-row">
+                    <span className="pr-card-author-text">
                       by <b>@{pr.author}</b>
                     </span>
                   </td>
                 </tr>
                 <tr>
-                  <td style={{ paddingTop: '8px' }}>
+                  <td className="pr-card-link-row">
                     <a
                       href={pr.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ 
-                        color: '#0000ff', 
-                        textDecoration: 'underline',
-                        fontFamily: 'Arial',
-                        fontSize: '12px'
-                      }}
+                      className="pr-card-link"
                     >
                       <b>[View &amp; Vote on GitHub →]</b>
                     </a>
@@ -70,12 +60,12 @@ export function PRCard({ pr, rank }: PRCardProps) {
               </tbody>
             </table>
           </td>
-          <td style={{ backgroundColor: rank === 1 ? "#ffcc00" : "#ccffcc", textAlign: 'center', width: '15%' }}>
-            <span style={{ fontSize: '24px', fontFamily: 'Arial' }}>
+          <td className={rank === 1 ? 'pr-card-votes-cell-leading' : 'pr-card-votes-cell-normal'}>
+            <span className="pr-card-votes-emoji">
               👍
             </span>
             <br />
-            <span style={{ fontSize: '20px', color: rank === 1 ? "#ff0000" : "#006600", fontFamily: 'Comic Sans MS' }}>
+            <span className={rank === 1 ? 'pr-card-votes-count-leading' : 'pr-card-votes-count-normal'}>
               <b>{pr.votes}</b>
             </span>
           </td>

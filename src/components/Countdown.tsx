@@ -58,15 +58,15 @@ export function Countdown() {
 
   if (!mounted) {
     return (
-      <table border={3} cellPadding={15} style={{ backgroundColor: '#ff00ff', borderColor: '#ffff00' }}>
+      <table border={3} cellPadding={15} className="countdown-table">
         <tbody>
           <tr>
-            <td style={{ textAlign: 'center' }}>
-              <span style={{ fontSize: '36px', color: '#00ff00', fontFamily: 'Courier New' }}>
+            <td className="countdown-cell">
+              <span className="countdown-time">
                 <b>--d --h --m --s</b>
               </span>
               <br />
-              <span style={{ fontSize: '16px', color: '#ffff00', fontFamily: 'Comic Sans MS' }}>
+              <span className="countdown-label">
                 <b>⏰ until next merge ⏰</b>
               </span>
             </td>
@@ -77,32 +77,22 @@ export function Countdown() {
   }
 
   return (
-    <table border={3} cellPadding={15} style={{ backgroundColor: '#ff00ff', borderColor: '#ffff00' }}>
+    <table border={3} cellPadding={15} className="countdown-table">
       <tbody>
         <tr>
-          <td style={{ textAlign: 'center' }}>
-            <span style={{ fontSize: '36px', color: '#00ff00', fontFamily: 'Courier New' }}>
+          <td className="countdown-cell">
+            <span className="countdown-time">
               <b className="blink-countdown">
                 {time.days}d {pad(time.hours)}h {pad(time.minutes)}m {pad(time.seconds)}s
               </b>
             </span>
             <br />
-            <span style={{ fontSize: '16px', color: '#ffff00', fontFamily: 'Comic Sans MS' }}>
+            <span className="countdown-label">
               <b>⏰ until next merge ⏰</b>
             </span>
           </td>
         </tr>
       </tbody>
-      <style jsx>{`
-        @keyframes blink-countdown {
-          0%, 50% { opacity: 1; }
-          51%, 100% { opacity: 0.7; }
-        }
-        
-        .blink-countdown {
-          animation: blink-countdown 1s infinite;
-        }
-      `}</style>
     </table>
   );
 }
