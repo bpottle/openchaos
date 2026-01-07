@@ -87,7 +87,7 @@ export function IE6Layout({ children }: IE6LayoutProps) {
                         <span className="ie6-visitor-text">
                           {/* @ts-expect-error marquee is deprecated but used for retro styling */}
                           <marquee scrollamount="3" width="60%">
-                            👾 You are visitor #999999 👾 Last updated: {new Date().toLocaleDateString()} 👾 Webmaster: skridlevsky@geocities.com 👾
+                            👾 Last updated: {new Date().toLocaleDateString()} 👾 Webmaster: skridlevsky@geocities.com 👾
                           {/* @ts-expect-error marquee is deprecated but used for retro styling */}
                           </marquee>
                         </span>

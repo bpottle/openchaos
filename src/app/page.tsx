@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Countdown } from "@/components/Countdown";
 import { PRList } from "@/components/PRList";
 import { IE6Layout } from "@/components/IE6Layout";
+import { WebCounter } from "@/components/WebCounter";
 
 export default function Home() {
   return (
@@ -50,6 +51,8 @@ export default function Home() {
           </tbody>
         </table>
       </div>
+      
+      <WebCounter />
     </IE6Layout>
   );
 }
