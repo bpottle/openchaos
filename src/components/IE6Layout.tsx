@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { Guestbook } from "./Guestbook";
 
 interface IE6LayoutProps {
@@ -8,8 +8,28 @@ interface IE6LayoutProps {
 }
 
 export function IE6Layout({ children }: IE6LayoutProps) {
+  const [showRealPlayer, setShowRealPlayer] = useState(false);
+
   return (
     <>
+      {/* RealPlayer Modal - Rendered at top level */}
+      {showRealPlayer && (
+        <div className="realplayer-modal-overlay" onClick={() => setShowRealPlayer(false)}>
+          <div className="realplayer-modal" onClick={(e) => e.stopPropagation()}>
+            <button 
+              onClick={() => setShowRealPlayer(false)}
+              className="realplayer-close-button"
+            >
+              <b>[X] CLOSE</b>
+            </button>
+            <img
+              src="/rp.png"
+              alt="RealPlayer"
+              className="realplayer-image"
+            />
+          </div>
+        </div>
+      )}
       {/* IE6 Compatibility Mode Header */}
       <div className="ie6-header">
         🔥 Best Viewed in Internet Explorer 6.0 at 800x600 Resolution 🔥
@@ -45,7 +65,7 @@ export function IE6Layout({ children }: IE6LayoutProps) {
               <td className="ie6-marquee-cell">
                 <span className="ie6-marquee-text">
                   {/* @ts-expect-error marquee is deprecated but used for retro styling */}
-                  <marquee scrollamount="5" width="80%">
+                  <marquee scrollamount="5" width="100%">
                     🚧 UNDER CONSTRUCTION 🚧 Welcome to the WORLD WIDE WEB! 🚧 This site is OPTIMIZED for Netscape Navigator 4.0 🚧
                   {/* @ts-expect-error marquee is deprecated but used for retro styling */}
                   </marquee>
@@ -118,7 +138,7 @@ export function IE6Layout({ children }: IE6LayoutProps) {
                 <span className="ie6-bottom-banner-text">
                   {/* @ts-expect-error marquee is deprecated but used for retro styling */}
                   <marquee>
-                    💿 Download Internet Explorer 6 NOW for the BEST browsing experience! 💿 Get Flash Player 8! 💿 Get RealPlayer! 💿
+                    💿 Download Internet Explorer 6 NOW for the BEST browsing experience! 💿 Get Flash Player 8! 💿 Get <span onClick={() => setShowRealPlayer(true)} className="realplayer-link">RealPlayer</span>! 💿
                   {/* @ts-expect-error marquee is deprecated but used for retro styling */}
                   </marquee>
                 </span>
