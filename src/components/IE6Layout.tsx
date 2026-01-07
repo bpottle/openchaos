@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
+import { Guestbook } from "./Guestbook";
 
 interface IE6LayoutProps {
   children: ReactNode;
@@ -75,6 +76,10 @@ export function IE6Layout({ children }: IE6LayoutProps) {
                             </a>
                           </b>
                         </span>
+                        <br />
+                        <div style={{ marginTop: "10px" }}>
+                          <Guestbook />
+                        </div>
                       </td>
                     </tr>
                     <tr>
