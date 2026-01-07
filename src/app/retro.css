@@ -173,6 +173,7 @@
 .countdown-table {
   background-color: #ff00ff;
   border-color: #ffff00;
+  margin: 0 auto;
 }
 
 .countdown-cell {
@@ -239,6 +240,7 @@
   font-size: 14px;
   color: #ff0000;
   font-family: Arial;
+  white-space: nowrap;
 }
 
 .pr-card-content-cell-leading {
