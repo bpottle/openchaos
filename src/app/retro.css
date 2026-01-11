@@ -747,6 +747,122 @@
   transform: scale(0.95);
 }
 
+/* ===== TREEGAME COMPONENT ===== */
+.tree-game-button {
+  background-color: #00ff00;
+  color: #ff0000;
+  border: 3px solid #ffff00;
+  padding: 8px 16px;
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  margin: 5px;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.tree-game-button:hover {
+  background-color: #66ff66;
+  color: #ff0000;
+}
+
+.tree-game-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.tree-game-modal {
+  background-color: #c0c0c0;
+  border: 4px solid #000000;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.5);
+}
+
+.tree-game-table {
+  background-color: #ffffff;
+  border-color: #ff0000;
+  width: 100%;
+}
+
+.tree-game-header {
+  background: linear-gradient(to right, #ff0000, #ffff00, #00ff00);
+  text-align: center;
+  padding: 15px;
+}
+
+.tree-game-header-text {
+  font-size: 28px;
+  color: #ffffff;
+  font-family: 'Comic Sans MS', cursive;
+  text-shadow: 3px 3px #000000;
+}
+
+.tree-game-instructions {
+  background-color: #ffff00;
+  text-align: center;
+  padding: 10px;
+}
+
+.tree-game-instructions-text {
+  font-size: 16px;
+  color: #ff0000;
+  font-family: 'Comic Sans MS', cursive;
+}
+
+.tree-game-image-container {
+  background-color: #ffffff;
+  padding: 0;
+  text-align: center;
+  vertical-align: top;
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.tree-game-image {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.tree-game-footer {
+  background-color: #00ff00;
+  text-align: center;
+  padding: 15px;
+}
+
+.tree-game-close-button {
+  background-color: #ff0000;
+  color: #ffff00;
+  border: 3px solid #000000;
+  padding: 10px 20px;
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.tree-game-close-button:hover {
+  background-color: #ff6666;
+  color: #ffffff;
+}
+
 /* ===== WEBCOUNTER COMPONENT ===== */
 .webcounter-container {
   text-align: center;

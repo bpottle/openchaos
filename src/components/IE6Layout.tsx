@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 import { Guestbook } from "./Guestbook";
 import { CursorTrail } from "./CursorTrail";
 import { MidiPlayer } from "./MidiPlayer";
+import { TreeGame } from "./TreeGame";
 
 interface IE6LayoutProps {
   children: ReactNode;
@@ -82,6 +83,7 @@ export function IE6Layout({ children }: IE6LayoutProps) {
                         <br />
                         <div style={{ marginTop: "10px" }}>
                           <Guestbook />
+                          <TreeGame />
                         </div>
                       </td>
                     </tr>
