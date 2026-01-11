@@ -2,6 +2,7 @@
 
 import { ReactNode } from "react";
 import { Guestbook } from "./Guestbook";
+import { CursorTrail } from "./CursorTrail";
 
 interface IE6LayoutProps {
   children: ReactNode;
@@ -10,6 +11,7 @@ interface IE6LayoutProps {
 export function IE6Layout({ children }: IE6LayoutProps) {
   return (
     <>
+      <CursorTrail />
       {/* IE6 Compatibility Mode Header */}
       <div className="ie6-header">
         🔥 Best Viewed in Internet Explorer 6.0 at 800x600 Resolution 🔥

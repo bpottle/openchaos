@@ -96,7 +96,20 @@
   }
 }
 
+@keyframes cursor-trail-fade {
+  0% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 /* ===== UTILITY CLASSES ===== */
+.cursor-trail-emoji {
+  animation: cursor-trail-fade 0.8s ease-out forwards;
+}
+
 .blink-text {
   animation: blink 1s infinite;
 }
