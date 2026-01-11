@@ -575,7 +575,7 @@
 
 /* ===== REALPLAYER MODAL COMPONENT ===== */
 .realplayer-link {
-  cursor: default;
+  cursor: pointer;
   color: inherit;
 }
 

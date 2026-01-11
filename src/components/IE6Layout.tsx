@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { Guestbook } from "./Guestbook";
 
 interface IE6LayoutProps {
@@ -8,28 +8,8 @@ interface IE6LayoutProps {
 }
 
 export function IE6Layout({ children }: IE6LayoutProps) {
-  const [showRealPlayer, setShowRealPlayer] = useState(false);
-
   return (
     <>
-      {/* RealPlayer Modal - Rendered at top level */}
-      {showRealPlayer && (
-        <div className="realplayer-modal-overlay" onClick={() => setShowRealPlayer(false)}>
-          <div className="realplayer-modal" onClick={(e) => e.stopPropagation()}>
-            <button 
-              onClick={() => setShowRealPlayer(false)}
-              className="realplayer-close-button"
-            >
-              <b>[X] CLOSE</b>
-            </button>
-            <img
-              src="/rp.png"
-              alt="RealPlayer"
-              className="realplayer-image"
-            />
-          </div>
-        </div>
-      )}
       {/* IE6 Compatibility Mode Header */}
       <div className="ie6-header">
         🔥 Best Viewed in Internet Explorer 6.0 at 800x600 Resolution 🔥
@@ -120,6 +100,30 @@ export function IE6Layout({ children }: IE6LayoutProps) {
                         </span>
                       </td>
                     </tr>
+                    <tr>
+                      <td className="ie6-footer-cell" style={{ textAlign: "center", padding: "10px" }}>
+                        <div style={{ display: "flex", justifyContent: "center", gap: "8px", flexWrap: "wrap" }}>
+                          <a href="https://blog.openchaos.dev/" target="_blank" rel="noopener noreferrer">
+                            <img src="/buttons/2cows.gif" alt="2 Cows" width="88" height="31" />
+                          </a>
+                          <a href="https://blog.openchaos.dev/" target="_blank" rel="noopener noreferrer">
+                            <img src="/buttons/3dkingdom.gif" alt="3D Kingdom" width="88" height="31" />
+                          </a>
+                          <a href="https://blog.openchaos.dev/" target="_blank" rel="noopener noreferrer">
+                            <img src="/buttons/angelfire.gif" alt="Angelfire" width="88" height="31" />
+                          </a>
+                          <a href="https://blog.openchaos.dev/" target="_blank" rel="noopener noreferrer">
+                            <img src="/buttons/FreewareGuide.gif" alt="Freeware Guide" width="88" height="31" />
+                          </a>
+                          <a href="https://blog.openchaos.dev/" target="_blank" rel="noopener noreferrer">
+                            <img src="/buttons/geocitieswww.gif" alt="Geocities" width="88" height="31" />
+                          </a>
+                          <a href="https://blog.openchaos.dev/" target="_blank" rel="noopener noreferrer">
+                            <img src="/buttons/lycos.gif" alt="Lycos" width="88" height="31" />
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </td>
@@ -138,7 +142,7 @@ export function IE6Layout({ children }: IE6LayoutProps) {
                 <span className="ie6-bottom-banner-text">
                   {/* @ts-expect-error marquee is deprecated but used for retro styling */}
                   <marquee>
-                    💿 Download Internet Explorer 6 NOW for the BEST browsing experience! 💿 Get Flash Player 8! 💿 Get <span onClick={() => setShowRealPlayer(true)} className="realplayer-link">RealPlayer</span>! 💿
+                    💿 Download Internet Explorer 6 NOW for the BEST browsing experience! 💿 <a href="http://www.macromedia.com/go/getflashplayer" target="_blank" rel="noopener noreferrer">Get Flash Player 6!</a> 💿 <a href="https://www.real.com/" target="_blank" rel="noopener noreferrer" className="realplayer-link">Get RealPlayer</a>! 💿
                   {/* @ts-expect-error marquee is deprecated but used for retro styling */}
                   </marquee>
                 </span>
