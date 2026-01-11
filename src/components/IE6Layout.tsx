@@ -3,6 +3,7 @@
 import { ReactNode } from "react";
 import { Guestbook } from "./Guestbook";
 import { CursorTrail } from "./CursorTrail";
+import { MidiPlayer } from "./MidiPlayer";
 
 interface IE6LayoutProps {
   children: ReactNode;
@@ -153,6 +154,7 @@ export function IE6Layout({ children }: IE6LayoutProps) {
           </tbody>
         </table>
       </main>
+      <MidiPlayer />
     </>
   );
 }
