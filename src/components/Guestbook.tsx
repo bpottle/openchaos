@@ -9,27 +9,27 @@ export function Guestbook() {
     {
       name: "xXCoolDude99Xx",
       date: "12/25/1999",
-      message: "OMG this site is totally PHAT! The colors are so rad and that marquee is DA BOMB! Keep it real, webmaster! This is all that and a bag of chips!"
+      message: "Y2K is coming!!! Stock up on canned food and batteries! The government doesn't want you to know! Visit my site: geocities.com/area51/bunker/xXCoolDude99Xx for the TRUTH!!!"
     },
     {
       name: "SkaterGrrl4Life",
       date: "11/18/1999",
-      message: "Yo this page is the SHIZNIT! So totally tubular and wicked awesome! You're the bomb dot com! This site is off the hook! As if anyone could make something cooler!"
+      message: "SEND THIS TO 10 PPL OR YOU WILL HAVE BAD LUCK FOR 7 YEARS!!! Britney is my queen btw. ^_^"
     },
     {
       name: "NetSurfer2000",
       date: "10/31/1999",
-      message: "DUDE! This site is PHAT like whoa! Totally radical use of tables and colors! You da man! This is so money! The blink tags are killer! All your base are belong to this awesome site!"
+      message: "FREE MONEY ONLINE!!! Work from home!!! Click here -> www.priceiswrongbitch.net <- I made $5000 last week!!! This really works!!!"
     },
     {
       name: "TechWiz98",
       date: "09/15/1999",
-      message: "This site is tight! Super fly and totally bangin'! The layout is choice and those animated GIFs would be off the chain! You got mad skills, homes! This is DOPE! Talk to the hand if you don't like it!"
+      message: "WHOA this is like THE MATRIX! What if WE'RE in the matrix right now?!?! Email me: TechWiz98@hotmail.com to discuss THEORIES!"
     },
     {
       name: "CyberChick777",
       date: "08/08/1999",
-      message: "OMG this is like, SO AWESOME! This page is all that! Totally fresh and def NOT bogus! You're a l33t webmaster! As if anyone could hate on this! It's the bee's knees! Booyah!"
+      message: "OpenChaos 4 ever <3 <3 <3 Also my homepage is angelfire.com/cybercutie777 plz visit & sign MY guestbook too!!!! xoxo *~*~*"
     }
   ];
 
