@@ -42,7 +42,7 @@ export function WebCounter() {
               className="webcounter-header-cell"
             >
               <span className="webcounter-header-text">
-                ★ YOU ARE VISITOR NUMBER ★
+                <span className="sparkle-glint">★</span> YOU ARE VISITOR NUMBER <span className="sparkle-glint sparkle-delay-3">★</span>
               </span>
             </td>
           </tr>

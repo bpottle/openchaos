@@ -49,7 +49,7 @@ export function IE6Layout({ children }: IE6LayoutProps) {
                           <b>
                             {/* @ts-expect-error marquee is deprecated but used for retro styling */}
                             <marquee behavior="alternate" scrollamount="10">
-                              ⭐ OPENCHAOS.DEV ⭐
+                              <span className="sparkle-rotate-glint">⭐</span> OPENCHAOS.DEV <span className="sparkle-rotate-glint sparkle-delay-2">⭐</span>
                             {/* @ts-expect-error marquee is deprecated but used for retro styling */}
                             </marquee>
                           </b>

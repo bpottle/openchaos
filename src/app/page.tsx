@@ -16,7 +16,7 @@ export default function Home() {
               <td className="page-header-cell">
                 <span className="page-header-text">
                   <b>
-                    <span className="blink-text">✨ OPEN PRS - VOTE TO MERGE ✨</span>
+                    <span className="sparkle-pulse">✨</span> <span className="blink-text">OPEN PRS - VOTE TO MERGE</span> <span className="sparkle-pulse sparkle-delay-2">✨</span>
                   </b>
                 </span>
               </td>

@@ -50,7 +50,7 @@ export function Guestbook() {
                 <tr>
                   <td className="guestbook-modal-header">
                     <span className="guestbook-modal-header-text">
-                      <b>✨ GUESTBOOK ✨</b>
+                      <b><span className="sparkle-shine">✨</span> GUESTBOOK <span className="sparkle-shine sparkle-delay-2">✨</span></b>
                     </span>
                   </td>
                 </tr>
@@ -59,7 +59,7 @@ export function Guestbook() {
                     <span className="guestbook-modal-subheader-text">
                       {/* @ts-expect-error marquee is deprecated but used for retro styling */}
                       <marquee scrollamount="3">
-                        🌟 Thanks for visiting! Please read what other visitors have said! 🌟
+                        <span className="sparkle-twinkle">🌟</span> Thanks for visiting! Please read what other visitors have said! <span className="sparkle-twinkle sparkle-delay-1">🌟</span>
                       {/* @ts-expect-error marquee is deprecated but used for retro styling */}
                       </marquee>
                     </span>
