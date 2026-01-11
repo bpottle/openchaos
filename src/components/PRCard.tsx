@@ -41,7 +41,14 @@ export function PRCard({ pr, rank }: PRCardProps) {
                 <tr>
                   <td className="pr-card-author-row">
                     <span className="pr-card-author-text">
-                      by <b>@{pr.author}</b>
+                      by <a
+                        href={`https://github.com/${pr.author}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="pr-card-author-link"
+                      >
+                        <b>@{pr.author}</b>
+                      </a>
                     </span>
                   </td>
                 </tr>
