@@ -1,9 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function TreeGame() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showDebug, setShowDebug] = useState(false);
+  const [keySequence, setKeySequence] = useState("");
+
+  // Handle "w-i-n" key sequence to toggle debug overlay
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyPress = (e: KeyboardEvent) => {
+      const newSequence = (keySequence + e.key.toLowerCase()).slice(-3);
+      setKeySequence(newSequence);
+      
+      if (newSequence === "win") {
+        setShowDebug((prev) => !prev);
+        setKeySequence(""); // Reset after toggle
+      }
+    };
+
+    window.addEventListener("keypress", handleKeyPress);
+    return () => window.removeEventListener("keypress", handleKeyPress);
+  }, [isOpen, keySequence]);
 
   const handleImageClick = (e: React.MouseEvent<HTMLImageElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -15,8 +35,8 @@ export function TreeGame() {
     const yPercent = (y / rect.height) * 100;
     
     // Winning zone: tiny section in upper-left quadrant
-    // Between 15-20% from left and 20-25% from top
-    if (xPercent >= 15 && xPercent <= 20 && yPercent >= 20 && yPercent <= 25) {
+    // Between 17-18.25% from left and 22-23.25% from top (1.25% x 1.25%)
+    if (xPercent >= 17 && xPercent <= 18.25 && yPercent >= 22 && yPercent <= 23.25) {
       alert("YOU WON! Click OK to enter your banking account information.");
     } else {
       alert("Sorry, try again!");
@@ -53,13 +73,31 @@ export function TreeGame() {
                 </tr>
                 <tr>
                   <td className="tree-game-image-container">
-                    <img 
-                      src="/tree.png" 
-                      alt="Click the right leaf!"
-                      className="tree-game-image"
-                      onClick={handleImageClick}
-                      style={{ cursor: 'pointer', maxWidth: '100%', display: 'block' }}
-                    />
+                    <div style={{ position: 'relative', display: 'inline-block' }}>
+                      <img 
+                        src="/tree.png" 
+                        alt="Click the right leaf!"
+                        className="tree-game-image"
+                        onClick={handleImageClick}
+                        style={{ cursor: 'pointer', maxWidth: '100%', display: 'block' }}
+                      />
+                      {/* Winning zone overlay - Type "w-i-n" to toggle */}
+                      {showDebug && (
+                        <div 
+                          style={{
+                            position: 'absolute',
+                            left: '17%',
+                            top: '22%',
+                            width: '1.25%',
+                            height: '1.25%',
+                            backgroundColor: 'rgba(0, 255, 0, 0.3)',
+                            border: '2px solid lime',
+                            pointerEvents: 'none'
+                          }}
+                          title="Winning zone (17-18.25% x, 22-23.25% y)"
+                        />
+                      )}
+                    </div>
                   </td>
                 </tr>
                 <tr>
