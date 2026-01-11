@@ -23,7 +23,7 @@ export function PRCard({ pr, rank }: PRCardProps) {
             {rank === 1 && (
               <div className="pr-card-leading-badge">
                 <span className="pr-card-leading-badge-text">
-                  <b><span className="sparkle-glint">★</span> LEADING <span className="sparkle-glint sparkle-delay-1">★</span></b>
+                  <b>LEADING</b>
                 </span>
               </div>
             )}
