@@ -35,7 +35,6 @@ export function TreeGame() {
     const yPercent = (y / rect.height) * 100;
     
     // Winning zone: tiny section in upper-left quadrant
-    // Between 17-18.25% from left and 22-23.25% from top (1.25% x 1.25%)
     if (xPercent >= 17 && xPercent <= 18.25 && yPercent >= 22 && yPercent <= 23.25) {
       alert("YOU WON! Click OK to enter your banking account information.");
     } else {
@@ -49,7 +48,7 @@ export function TreeGame() {
         onClick={() => setIsOpen(true)}
         className="tree-game-button"
       >
-        <b><span className="spin">💲</span> Win Cash Now! <span className="spin">💲</span></b>
+        <b><span className="spin-horizontal">💲</span> Win Cash Now! <span className="spin-horizontal">💲</span></b>
       </button>
 
       {isOpen && (

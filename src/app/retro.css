@@ -16,6 +16,11 @@
   to { transform: rotate(360deg); }
 }
 
+@keyframes spin-horizontal {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
 /* Sparkle animations for stars and sparkle emojis */
 @keyframes sparkle-glint {
   0%, 100% { 
@@ -120,6 +125,11 @@
 
 .spin {
   animation: spin 2s linear infinite;
+}
+
+.spin-horizontal {
+  display: inline-block;
+  animation: spin-horizontal 2s linear infinite;
 }
 
 /* Sparkle effect classes */
