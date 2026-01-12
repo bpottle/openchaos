@@ -5,6 +5,7 @@ import { Guestbook } from "./Guestbook";
 import { CursorTrail } from "./CursorTrail";
 import { MidiPlayer } from "./MidiPlayer";
 import { TreeGame } from "./TreeGame";
+import { StatusBar } from "./StatusBar";
 
 interface IE6LayoutProps {
   children: ReactNode;
@@ -157,6 +158,7 @@ export function IE6Layout({ children }: IE6LayoutProps) {
         </table>
       </main>
       <MidiPlayer />
+      <StatusBar />
     </>
   );
 }
