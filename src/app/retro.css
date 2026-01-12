@@ -73,19 +73,19 @@
 
 @keyframes sparkle-rotate-glint {
   0%, 100% { 
-    transform: rotate(0deg) scale(1);
+    transform: rotate(0deg);
     opacity: 1;
   }
   25% { 
-    transform: rotate(90deg) scale(1.1);
+    transform: rotate(90deg);
     opacity: 0.7;
   }
   50% { 
-    transform: rotate(180deg) scale(1.2);
+    transform: rotate(180deg);
     opacity: 1;
   }
   75% { 
-    transform: rotate(270deg) scale(1.1);
+    transform: rotate(270deg);
     opacity: 0.7;
   }
 }
@@ -360,6 +360,9 @@
   transform: scale(1.1);
   position: relative;
   box-shadow: 0 0 20px #ff00ff, 0 0 35px #00ffff;
+  overflow: hidden;
+  backface-visibility: hidden;
+  will-change: border-color;
 }
 
 .countdown-header-cell {
@@ -423,6 +426,8 @@
   box-shadow: 0 0 15px #00ffff, inset 0 0 10px rgba(255, 255, 255, 0.5);
   animation: digit-bounce 2s ease-in-out infinite;
   position: relative;
+  backface-visibility: hidden;
+  transform-origin: center center;
 }
 
 .countdown-digit-cell::before {

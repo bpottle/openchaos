@@ -125,7 +125,7 @@ export function Countdown() {
           <tr>
             <td className="countdown-footer-cell">
               <div className="countdown-footer">
-                💫 <b>HURRY! TIME IS RUNNING OUT!</b> 💫
+                <b>HURRY! TIME IS RUNNING OUT!</b>
               </div>
             </td>
           </tr>
@@ -202,7 +202,7 @@ export function Countdown() {
         <tr>
           <td className="countdown-footer-cell">
             <div className="countdown-footer">
-              💫 <b>HURRY! TIME IS RUNNING OUT!</b> 💫
+              <b>HURRY! TIME IS RUNNING OUT!</b>
             </div>
           </td>
         </tr>
