@@ -355,11 +355,11 @@
   background-size: 200% 200%;
   border-color: #ffff00;
   border-width: 6px;
-  margin: 0 auto;
+  margin: 30px auto 40px;
   animation: countdown-border-pulse 3s linear infinite;
   transform: scale(1.1);
   position: relative;
-  box-shadow: 0 0 30px #ff00ff, 0 0 50px #00ffff;
+  box-shadow: 0 0 20px #ff00ff, 0 0 35px #00ffff;
 }
 
 .countdown-header-cell {
@@ -380,7 +380,7 @@
 }
 
 .countdown-header {
-  font-size: 24px;
+  font-size: 20px;
   color: #ffff00;
   font-family: 'Comic Sans MS', cursive;
   text-shadow: 4px 4px #000000, -2px -2px #000000, 0 0 10px #ffff00, 0 0 20px #ffff00;
@@ -437,7 +437,7 @@
 }
 
 .countdown-digit-value {
-  font-size: 56px;
+  font-size: 48px;
   color: #ff0000;
   font-family: 'Impact', 'Arial Black', sans-serif;
   text-shadow: 4px 4px #000000, -2px -2px #ffff00, 0 0 10px #ff0000, 0 0 20px #ff0000;
@@ -447,7 +447,7 @@
 }
 
 .countdown-digit-label {
-  font-size: 20px;
+  font-size: 16px;
   color: #ff0000;
   font-family: 'Arial Black', 'Impact', sans-serif;
   font-weight: bold;
@@ -476,7 +476,7 @@
 }
 
 .countdown-footer {
-  font-size: 18px;
+  font-size: 16px;
   color: #ffff00;
   font-family: 'Comic Sans MS', cursive;
   text-shadow: 3px 3px #000000, 0 0 10px #ffff00;
