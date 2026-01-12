@@ -36,22 +36,18 @@
 @keyframes sparkle-pulse {
   0%, 100% { 
     opacity: 1;
-    transform: scale(1);
     filter: brightness(1);
   }
   25% { 
     opacity: 0.8;
-    transform: scale(1.15);
     filter: brightness(1.3);
   }
   50% { 
     opacity: 1;
-    transform: scale(1.3);
     filter: brightness(1.5);
   }
   75% { 
     opacity: 0.8;
-    transform: scale(1.15);
     filter: brightness(1.3);
   }
 }
@@ -93,11 +89,9 @@
 @keyframes sparkle-shine {
   0%, 100% {
     text-shadow: 0 0 2px currentColor;
-    filter: brightness(1);
   }
   50% {
     text-shadow: 0 0 8px currentColor, 0 0 12px currentColor;
-    filter: brightness(1.5);
   }
 }
 
@@ -388,7 +382,7 @@
   font-size: 20px;
   color: #ffff00;
   font-family: 'Comic Sans MS', cursive;
-  text-shadow: 4px 4px #000000, -2px -2px #000000, 0 0 10px #ffff00, 0 0 20px #ffff00;
+  text-shadow: 2px 2px #000000, -1px -1px #000000, 0 0 5px #ffff00;
   font-weight: bold;
 }
 
@@ -408,6 +402,11 @@
   left: 10px;
   font-size: 20px;
   animation: sparkle-rotate-glint 3s linear infinite;
+  width: 20px;
+  height: 20px;
+  display: block;
+  pointer-events: none;
+  line-height: 1;
 }
 
 .countdown-content-cell::after {
@@ -417,6 +416,11 @@
   right: 10px;
   font-size: 20px;
   animation: sparkle-rotate-glint 3s linear infinite reverse;
+  width: 20px;
+  height: 20px;
+  display: block;
+  pointer-events: none;
+  line-height: 1;
 }
 
 .countdown-digit-cell {
@@ -424,12 +428,8 @@
   border: 5px ridge #ffffff;
   padding: 20px 15px;
   text-align: center;
-  min-width: 90px;
-  box-shadow: 0 0 15px #00ffff, inset 0 0 10px rgba(255, 255, 255, 0.5);
-  animation: digit-bounce 2s ease-in-out infinite;
+  width: 90px;
   position: relative;
-  backface-visibility: hidden;
-  transform-origin: center center;
 }
 
 .countdown-digit-cell::before {
@@ -451,6 +451,10 @@
   line-height: 1;
   margin-bottom: 8px;
   animation: sparkle-shine 2s ease-in-out infinite;
+  will-change: text-shadow;
+  transform: translateZ(0);
+  font-variant-numeric: tabular-nums;
+  width: 100%;
 }
 
 .countdown-digit-label {
@@ -486,7 +490,7 @@
   font-size: 16px;
   color: #ffff00;
   font-family: 'Comic Sans MS', cursive;
-  text-shadow: 3px 3px #000000, 0 0 10px #ffff00;
+  text-shadow: 2px 2px #000000, 0 0 5px #ffff00;
   text-align: center;
   font-weight: bold;
 }
