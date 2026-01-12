@@ -346,7 +346,7 @@
     transform: scale(1);
   }
   50% {
-    transform: scale(1.1);
+    transform: scale(1.03);
   }
 }
 
@@ -363,6 +363,8 @@
   overflow: hidden;
   backface-visibility: hidden;
   will-change: border-color;
+  width: 750px;
+  max-width: 90%;
 }
 
 .countdown-header-cell {
