@@ -182,11 +182,11 @@
 
 /* Toolbar */
 .ie6-toolbar {
-  height: 36px;
+  height: 42px;
   background: #c0c0c0;
   display: flex;
   align-items: center;
-  padding: 2px 4px;
+  padding: 4px 6px;
   gap: 2px;
   border-bottom: 1px solid #808080;
   border-top: 1px solid #ffffff;
@@ -200,7 +200,7 @@
 
 .ie6-separator {
   width: 1px;
-  height: 32px;
+  height: 34px;
   background: #808080;
   box-shadow: 1px 0 0 #ffffff;
   margin: 0 2px;
