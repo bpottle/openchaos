@@ -6,6 +6,7 @@ import { CursorTrail } from "./CursorTrail";
 import { MidiPlayer } from "./MidiPlayer";
 import { TreeGame } from "./TreeGame";
 import { StatusBar } from "./StatusBar";
+import { IE6BrowserChrome } from "./IE6BrowserChrome";
 
 interface IE6LayoutProps {
   children: ReactNode;
@@ -15,6 +16,7 @@ export function IE6Layout({ children }: IE6LayoutProps) {
   return (
     <>
       <CursorTrail />
+      <IE6BrowserChrome>
       {/* IE6 Compatibility Mode Header */}
       <div className="ie6-header">
         🔥 Best Viewed in Internet Explorer 6.0 at 800x600 Resolution 🔥
@@ -159,6 +161,7 @@ export function IE6Layout({ children }: IE6LayoutProps) {
       </main>
       <MidiPlayer />
       <StatusBar />
+      </IE6BrowserChrome>
     </>
   );
 }

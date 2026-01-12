@@ -1,5 +1,312 @@
 /* Retro IE6 Styles - Abstracted from inline styles */
 
+/* ===== CUSTOM SCROLLBARS (IE6/Windows XP Style) ===== */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: #d4d0c8;
+  border: 1px solid #808080;
+  box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #ece9d8 0%, #ece9d8 50%, #e3dfd8 50%, #e3dfd8 100%);
+  border: 1px outset #ffffff;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to right, #f5f3ec 0%, #f5f3ec 50%, #ebe8e0 50%, #ebe8e0 100%);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(to right, #ccc9bc 0%, #ccc9bc 50%, #c4c0b8 50%, #c4c0b8 100%);
+  border: 1px inset #808080;
+}
+
+::-webkit-scrollbar-button {
+  background: linear-gradient(to bottom, #ece9d8 0%, #d4d0c8 100%);
+  border: 1px outset #ffffff;
+  height: 16px;
+  width: 16px;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+::-webkit-scrollbar-button:hover {
+  background: linear-gradient(to bottom, #f5f3ec 0%, #e0ddd5 100%);
+}
+
+::-webkit-scrollbar-button:active {
+  background: linear-gradient(to bottom, #d4d0c8 0%, #c4c0b8 100%);
+  border: 1px inset #808080;
+}
+
+::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath fill='%23000' d='M4 2L1 5h6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+::-webkit-scrollbar-button:vertical:increment {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath fill='%23000' d='M4 6L1 3h6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+::-webkit-scrollbar-button:horizontal:decrement {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath fill='%23000' d='M2 4L5 1v6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+::-webkit-scrollbar-button:horizontal:increment {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath fill='%23000' d='M6 4L3 1v6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Firefox scrollbar styling */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #d4d0c8 #ece9d8;
+}
+
+/* ===== IE6 BROWSER CHROME ===== */
+.ie6-browser-window {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  background: #ece9d8;
+  font-family: 'Tahoma', 'Arial', sans-serif;
+  overflow: hidden;
+}
+
+/* Title Bar */
+.ie6-titlebar {
+  height: 28px;
+  background: linear-gradient(to bottom, #0997ff 0%, #0053ee 4%, #0050ee 6%, #004de5 8%, #0047d7 10%, #003dd0 14%, #0031c6 20%, #002aba 24%, #0027b2 56%, #0024ab 66%, #0022a8 76%, #001ea0 86%, #001d9e 92%, #001c9c 94%, #001799 96%, #001496 98%, #001494 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+  border-bottom: 1px solid #0831d9;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.ie6-titlebar-left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ie6-titlebar-icon {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+}
+
+.ie6-titlebar-text {
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.ie6-titlebar-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+.ie6-titlebar-button {
+  width: 21px;
+  height: 21px;
+  background: linear-gradient(to bottom, #3c7eff 0%, #0050ee 100%);
+  border: 1px solid #ffffff;
+  border-radius: 2px;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.ie6-titlebar-button:hover {
+  background: linear-gradient(to bottom, #5c9eff 0%, #2070ff 100%);
+}
+
+.ie6-titlebar-button:active {
+  background: linear-gradient(to bottom, #0040cc 0%, #0030aa 100%);
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.ie6-close {
+  background: linear-gradient(to bottom, #ff6b6b 0%, #ee0000 100%);
+}
+
+.ie6-close:hover {
+  background: linear-gradient(to bottom, #ff8b8b 0%, #ff2020 100%);
+}
+
+/* Menu Bar */
+.ie6-menubar {
+  height: 20px;
+  background: #ece9d8;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  border-bottom: 1px solid #ffffff;
+  box-shadow: 0 1px 0 #808080;
+  font-size: 11px;
+}
+
+.ie6-menu-item {
+  padding: 2px 8px;
+  cursor: pointer;
+  color: #000000;
+}
+
+.ie6-menu-item:hover {
+  background: #3169c6;
+  color: #ffffff;
+}
+
+/* Toolbar */
+.ie6-toolbar {
+  height: 38px;
+  background: linear-gradient(to bottom, #f1ede7 0%, #dcd8d0 100%);
+  display: flex;
+  align-items: center;
+  padding: 2px 4px;
+  gap: 4px;
+  border-bottom: 1px solid #ffffff;
+  box-shadow: 0 1px 0 #808080;
+}
+
+.ie6-toolbar-buttons {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.ie6-separator {
+  width: 1px;
+  height: 32px;
+  background: #808080;
+  box-shadow: 1px 0 0 #ffffff;
+  margin: 0 2px;
+}
+
+.ie6-toolbar-button {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 3px 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  border-radius: 2px;
+}
+
+.ie6-toolbar-button:hover {
+  background: linear-gradient(to bottom, #ffffff 0%, #e8e4dc 100%);
+  border: 1px solid #3169c6;
+}
+
+.ie6-toolbar-button:active {
+  background: linear-gradient(to bottom, #c1bdb5 0%, #d4d0c8 100%);
+  border: 1px solid #808080;
+}
+
+.ie6-button-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.ie6-button-label {
+  font-size: 9px;
+  color: #000000;
+}
+
+/* Address Bar */
+.ie6-addressbar {
+  height: 26px;
+  background: #ece9d8;
+  display: flex;
+  align-items: center;
+  padding: 2px 4px;
+  gap: 4px;
+  border-bottom: 1px solid #ffffff;
+  box-shadow: 0 1px 0 #808080;
+}
+
+.ie6-addressbar-label {
+  font-size: 11px;
+  color: #000000;
+  font-weight: normal;
+  padding: 0 4px;
+}
+
+.ie6-addressbar-input {
+  flex: 1;
+  height: 20px;
+  background: #ffffff;
+  border: 1px inset #808080;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  gap: 4px;
+}
+
+.ie6-addressbar-icon {
+  font-size: 12px;
+}
+
+.ie6-addressbar-url {
+  flex: 1;
+  font-size: 11px;
+  color: #000000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ie6-addressbar-go {
+  height: 20px;
+  padding: 0 12px;
+  background: linear-gradient(to bottom, #ece9d8 0%, #d4d0c8 100%);
+  border: 1px outset #ffffff;
+  font-size: 11px;
+  cursor: pointer;
+  color: #000000;
+}
+
+.ie6-addressbar-go:hover {
+  background: linear-gradient(to bottom, #f5f3ec 0%, #e0ddd5 100%);
+}
+
+.ie6-addressbar-go:active {
+  background: linear-gradient(to bottom, #d4d0c8 0%, #c4c0b8 100%);
+  border: 1px inset #808080;
+}
+
+/* Content Area */
+.ie6-content-area {
+  flex: 1;
+  overflow: auto;
+  background: #c0c0c0;
+}
+
 /* ===== ANIMATIONS ===== */
 @keyframes blink {
   0%, 49% { opacity: 1; }
