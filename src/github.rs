@@ -37,6 +37,12 @@ pub struct GitHubClient {
     client: reqwest::Client,
 }
 
+impl Default for GitHubClient {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl GitHubClient {
     pub fn new() -> Self {
         let mut headers = reqwest::header::HeaderMap::new();
@@ -60,7 +66,7 @@ impl GitHubClient {
             client: reqwest::Client::builder()
                 .default_headers(headers)
                 .build()
-                .unwrap(),
+                .expect("Failed to build HTTP client"),
         }
     }
 
