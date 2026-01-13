@@ -69,18 +69,39 @@ impl GitHubClient {
         owner: &str,
         repo: &str,
     ) -> Result<Vec<PullRequest>, Box<dyn std::error::Error>> {
-        let url = format!(
-            "https://api.github.com/repos/{}/{}/pulls?state=open&per_page=100",
-            owner, repo
-        );
+        let mut all_pulls = Vec::new();
+        let mut page = 1;
 
-        let response = self.client.get(&url).send().await?;
+        // Fetch all pages of PRs
+        loop {
+            let url = format!(
+                "https://api.github.com/repos/{}/{}/pulls?state=open&per_page=100&page={}",
+                owner, repo, page
+            );
 
-        if !response.status().is_success() {
-            return Err(format!("GitHub API error: {}", response.status()).into());
+            let response = self.client.get(&url).send().await?;
+
+            if !response.status().is_success() {
+                return Err(format!("GitHub API error: {}", response.status()).into());
+            }
+
+            let pulls: Vec<PullRequest> = response.json().await?;
+            
+            if pulls.is_empty() {
+                break;
+            }
+
+            let batch_size = pulls.len();
+            all_pulls.extend(pulls);
+
+            if batch_size < 100 {
+                break;
+            }
+
+            page += 1;
         }
 
-        let mut pulls: Vec<PullRequest> = response.json().await?;
+        let mut pulls = all_pulls;
 
         // Fetch reactions for each PR
         for pr in pulls.iter_mut() {
@@ -110,28 +131,47 @@ impl GitHubClient {
         repo: &str,
         pr_number: u32,
     ) -> Result<Reactions, Box<dyn std::error::Error>> {
-        let url = format!(
-            "https://api.github.com/repos/{}/{}/issues/{}/reactions?per_page=100",
-            owner, repo, pr_number
-        );
+        let mut all_reactions = Vec::new();
+        let mut page = 1;
 
-        let response = self.client
-            .get(&url)
-            .header(
-                reqwest::header::ACCEPT,
-                "application/vnd.github.squirrel-girl-preview+json",
-            )
-            .send()
-            .await?;
+        // Fetch all pages of reactions
+        loop {
+            let url = format!(
+                "https://api.github.com/repos/{}/{}/issues/{}/reactions?per_page=100&page={}",
+                owner, repo, pr_number, page
+            );
 
-        if !response.status().is_success() {
-            return Ok(Reactions::default());
+            let response = self.client
+                .get(&url)
+                .header(
+                    reqwest::header::ACCEPT,
+                    "application/vnd.github.squirrel-girl-preview+json",
+                )
+                .send()
+                .await?;
+
+            if !response.status().is_success() {
+                break;
+            }
+
+            let reactions: Vec<GitHubReaction> = response.json().await?;
+            
+            if reactions.is_empty() {
+                break;
+            }
+
+            let batch_size = reactions.len();
+            all_reactions.extend(reactions);
+
+            if batch_size < 100 {
+                break;
+            }
+
+            page += 1;
         }
-
-        let reactions: Vec<GitHubReaction> = response.json().await?;
         
-        let plus_one = reactions.iter().filter(|r| r.content == "+1").count() as u32;
-        let minus_one = reactions.iter().filter(|r| r.content == "-1").count() as u32;
+        let plus_one = all_reactions.iter().filter(|r| r.content == "+1").count() as u32;
+        let minus_one = all_reactions.iter().filter(|r| r.content == "-1").count() as u32;
 
         Ok(Reactions {
             plus_one,

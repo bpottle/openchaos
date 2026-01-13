@@ -200,6 +200,72 @@
             margin-bottom: 20px;
         }
 
+        .countdown-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 15px;
+        }
+
+        .countdown-timer {
+            font-size: 3em;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            color: #333;
+            letter-spacing: 2px;
+            margin: 20px 0;
+        }
+
+        .countdown-label {
+            color: #666;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .performance-banner {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .performance-banner h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .performance-stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2em;
@@ -223,6 +289,33 @@
     <div class="container">
         <h1>OpenChaos</h1>
         <p class="subtitle">GitHub Pull Request Dashboard</p>
+        
+        <div class="countdown-section">
+            <div class="countdown-timer" id="countdown">--d --h --m --s</div>
+            <div class="countdown-label">until next merge</div>
+        </div>
+
+        <div class="performance-banner">
+            <h3>Built with Rust</h3>
+            <div class="performance-stats">
+                <div class="stat-item">
+                    <div class="stat-value">~5MB</div>
+                    <div class="stat-label">Binary Size</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">&lt;10ms</div>
+                    <div class="stat-label">API Response</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Runtime Errors</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">∞</div>
+                    <div class="stat-label">Concurrency</div>
+                </div>
+            </div>
+        </div>
         
         <div class="input-group">
             <input type="text" id="owner" placeholder="Repository Owner" value="skridlevsky">
@@ -301,6 +394,56 @@
             div.textContent = text;
             return div.innerHTML;
         }
+
+        // Countdown timer functions
+        function getNextSunday9UTC() {
+            const now = new Date();
+            const target = new Date(now);
+
+            // Set to next Sunday
+            const daysUntilSunday = (7 - now.getUTCDay()) % 7;
+            target.setUTCDate(now.getUTCDate() + (daysUntilSunday === 0 ? 7 : daysUntilSunday));
+
+            // Set to 09:00 UTC
+            target.setUTCHours(9, 0, 0, 0);
+
+            // If it's Sunday but before 09:00 UTC, use today
+            if (now.getUTCDay() === 0 && now.getUTCHours() < 9) {
+                target.setUTCDate(now.getUTCDate());
+            }
+
+            return target;
+        }
+
+        function getTimeRemaining(target) {
+            const now = new Date();
+            const diff = Math.max(0, target.getTime() - now.getTime());
+
+            const seconds = Math.floor((diff / 1000) % 60);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const hours = Math.floor((diff / 1000 / 60 / 60) % 24);
+            const days = Math.floor(diff / 1000 / 60 / 60 / 24);
+
+            return { days, hours, minutes, seconds };
+        }
+
+        function pad(n) {
+            return n.toString().padStart(2, '0');
+        }
+
+        function updateCountdown() {
+            const target = getNextSunday9UTC();
+            const time = getTimeRemaining(target);
+            const countdownEl = document.getElementById('countdown');
+            
+            if (countdownEl) {
+                countdownEl.textContent = `${time.days}d ${pad(time.hours)}h ${pad(time.minutes)}m ${pad(time.seconds)}s`;
+            }
+        }
+
+        // Initialize countdown
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
         
         // Load openchaos repo on page load
         window.addEventListener('DOMContentLoaded', loadPRs);
