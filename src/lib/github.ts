@@ -70,6 +70,7 @@ export async function getOpenPRs(): Promise<PullRequest[]> {
 
   const prs = allPRs;
 
+  // Fetch reactions for each PR
   const prsWithVotes = await Promise.all(
     prs.map(async (pr) => {
       const votes = await getPRVotes(owner, repo, pr.number);
@@ -84,6 +85,7 @@ export async function getOpenPRs(): Promise<PullRequest[]> {
     }),
   );
 
+  // Sort by votes descending
   return prsWithVotes.sort((a, b) => {
     if (b.votes !== a.votes) {
       return b.votes - a.votes;

@@ -6,11 +6,14 @@ function getNextSunday8PM(): Date {
   const now = new Date();
   const target = new Date(now);
 
+  // Set to next Sunday
   const daysUntilSunday = (7 - now.getUTCDay()) % 7;
   target.setUTCDate(now.getUTCDate() + (daysUntilSunday === 0 ? 7 : daysUntilSunday));
 
+  // Set to 09:00 UTC
   target.setUTCHours(9, 0, 0, 0);
 
+  // If it's Sunday but before 09:00 UTC, use today
   if (now.getUTCDay() === 0 && now.getUTCHours() < 9) {
     target.setUTCDate(now.getUTCDate());
   }
