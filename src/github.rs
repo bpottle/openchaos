@@ -10,6 +10,21 @@ pub struct PullRequest {
     pub html_url: String,
     pub created_at: String,
     pub updated_at: String,
+    #[serde(default)]
+    pub reactions: Reactions,
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone, Default)]
+pub struct Reactions {
+    #[serde(rename = "+1")]
+    pub plus_one: u32,
+    #[serde(rename = "-1")]
+    pub minus_one: u32,
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+struct GitHubReaction {
+    content: String,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -55,7 +70,7 @@ impl GitHubClient {
         repo: &str,
     ) -> Result<Vec<PullRequest>, Box<dyn std::error::Error>> {
         let url = format!(
-            "https://api.github.com/repos/{}/{}/pulls?state=open",
+            "https://api.github.com/repos/{}/{}/pulls?state=open&per_page=100",
             owner, repo
         );
 
@@ -65,7 +80,62 @@ impl GitHubClient {
             return Err(format!("GitHub API error: {}", response.status()).into());
         }
 
-        let pulls: Vec<PullRequest> = response.json().await?;
+        let mut pulls: Vec<PullRequest> = response.json().await?;
+
+        // Fetch reactions for each PR
+        for pr in pulls.iter_mut() {
+            if let Ok(reactions) = self.get_pr_reactions(owner, repo, pr.number).await {
+                pr.reactions = reactions;
+            }
+        }
+
+        // Sort by votes (descending), then by creation date (newest first)
+        pulls.sort_by(|a, b| {
+            let votes_a = a.reactions.plus_one as i32 - a.reactions.minus_one as i32;
+            let votes_b = b.reactions.plus_one as i32 - b.reactions.minus_one as i32;
+            
+            if votes_b != votes_a {
+                votes_b.cmp(&votes_a)
+            } else {
+                b.created_at.cmp(&a.created_at)
+            }
+        });
+
         Ok(pulls)
+    }
+
+    async fn get_pr_reactions(
+        &self,
+        owner: &str,
+        repo: &str,
+        pr_number: u32,
+    ) -> Result<Reactions, Box<dyn std::error::Error>> {
+        let url = format!(
+            "https://api.github.com/repos/{}/{}/issues/{}/reactions?per_page=100",
+            owner, repo, pr_number
+        );
+
+        let response = self.client
+            .get(&url)
+            .header(
+                reqwest::header::ACCEPT,
+                "application/vnd.github.squirrel-girl-preview+json",
+            )
+            .send()
+            .await?;
+
+        if !response.status().is_success() {
+            return Ok(Reactions::default());
+        }
+
+        let reactions: Vec<GitHubReaction> = response.json().await?;
+        
+        let plus_one = reactions.iter().filter(|r| r.content == "+1").count() as u32;
+        let minus_one = reactions.iter().filter(|r| r.content == "-1").count() as u32;
+
+        Ok(Reactions {
+            plus_one,
+            minus_one,
+        })
     }
 }

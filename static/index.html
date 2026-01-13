@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -43,10 +44,7 @@
         }
 
         .input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+            display: none;
         }
 
         input {
@@ -106,6 +104,7 @@
         .pr-header {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 15px;
             margin-bottom: 15px;
         }
@@ -141,6 +140,27 @@
             border-radius: 20px;
             font-size: 0.85em;
             font-weight: 600;
+        }
+
+        .leading-badge {
+            display: inline-block;
+            background: #fbbf24;
+            color: #92400e;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-left: 8px;
+            text-transform: uppercase;
+        }
+
+        .vote-count {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
         }
 
         .pr-link {
@@ -201,12 +221,12 @@
 </head>
 <body>
     <div class="container">
-        <h1>🚀 OpenChaos</h1>
+        <h1>OpenChaos</h1>
         <p class="subtitle">GitHub Pull Request Dashboard</p>
         
         <div class="input-group">
-            <input type="text" id="owner" placeholder="Repository Owner (e.g., facebook)" value="facebook">
-            <input type="text" id="repo" placeholder="Repository Name (e.g., react)" value="react">
+            <input type="text" id="owner" placeholder="Repository Owner" value="skridlevsky">
+            <input type="text" id="repo" placeholder="Repository Name" value="openchaos">
             <button onclick="loadPRs()">Load Pull Requests</button>
         </div>
         
@@ -224,7 +244,7 @@
                 return;
             }
             
-            prList.innerHTML = '<div class="loading">⏳ Loading pull requests...</div>';
+            prList.innerHTML = '<div class="loading">Loading pull requests...</div>';
             
             try {
                 const response = await fetch(`/api/pulls?owner=${owner}&repo=${repo}`);
@@ -233,7 +253,6 @@
                 if (data.pulls.length === 0) {
                     prList.innerHTML = `
                         <div class="empty">
-                            <div class="empty-icon">📭</div>
                             <h2>No open pull requests</h2>
                             <p>This repository has no open PRs at the moment.</p>
                         </div>
@@ -241,28 +260,38 @@
                     return;
                 }
                 
-                prList.innerHTML = data.pulls.map(pr => `
+                prList.innerHTML = data.pulls.map((pr, index) => {
+                    const netVotes = (pr.reactions['+1'] || 0) - (pr.reactions['-1'] || 0);
+                    return `
                     <div class="pr-card">
                         <div class="pr-header">
-                            <img src="${pr.user.avatar_url}" alt="${pr.user.login}" class="pr-avatar">
-                            <div class="pr-info">
-                                <div class="pr-title">${escapeHtml(pr.title)}</div>
-                                <div class="pr-meta">
-                                    <span class="pr-number">#${pr.number}</span>
-                                    by ${escapeHtml(pr.user.login)}
+                            <div style="display: flex; align-items: center; gap: 15px; flex: 1; min-width: 0;">
+                                <img src="${pr.user.avatar_url}" alt="${pr.user.login}" class="pr-avatar">
+                                <div class="pr-info" style="flex: 1; min-width: 0;">
+                                    <div class="pr-title">${escapeHtml(pr.title)}</div>
+                                    <div class="pr-meta">
+                                        <span class="pr-number">#${pr.number}</span>
+                                        ${index === 0 ? '<span class="leading-badge">Leading</span>' : ''}
+                                        by ${escapeHtml(pr.user.login)}
+                                    </div>
                                 </div>
+                            </div>
+                            <div class="vote-count">
+                                <span>👍</span>
+                                <span>${netVotes}</span>
                             </div>
                         </div>
                         <div class="pr-meta">
                             Created: ${new Date(pr.created_at).toLocaleDateString()} | 
                             Updated: ${new Date(pr.updated_at).toLocaleDateString()}
                         </div>
-                        <a href="${pr.html_url}" target="_blank" class="pr-link">View on GitHub →</a>
+                        <a href="${pr.html_url}" target="_blank" class="pr-link">View & Vote on GitHub →</a>
                     </div>
-                `).join('');
+                `;
+                }).join('');
                 
             } catch (error) {
-                prList.innerHTML = '<div class="pr-card error">⚠️ Error loading pull requests. Please try again.</div>';
+                prList.innerHTML = '<div class="pr-card error">Error loading pull requests. Please try again.</div>';
                 console.error('Error:', error);
             }
         }
@@ -273,7 +302,7 @@
             return div.innerHTML;
         }
         
-        // Load default repo on page load
+        // Load openchaos repo on page load
         window.addEventListener('DOMContentLoaded', loadPRs);
     </script>
 </body>
