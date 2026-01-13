@@ -87,9 +87,12 @@ export async function getOpenPRs(): Promise<PullRequest[]> {
 
   // Sort by votes descending
   return prsWithVotes.sort((a, b) => {
+    // 1. Primary Sort: Net Score
     if (b.votes !== a.votes) {
       return b.votes - a.votes;
     }
+
+    // 2. Secondary Sort: Creation Date (Newest Wins)
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
 }
