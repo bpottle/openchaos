@@ -47,13 +47,11 @@ async fn get_pull_requests(Query(params): Query<RepoQuery>) -> Json<PRResponse> 
 
 #[tokio::main]
 async fn main() {
-    // Build the application with routes
     let app = Router::new()
         .route("/api/pulls", get(get_pull_requests))
         .fallback_service(ServeDir::new("static"))
         .layer(CorsLayer::permissive());
 
-    // Run the server
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
     println!("Server running on http://{}", addr);
     

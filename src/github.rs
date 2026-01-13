@@ -101,7 +101,6 @@ impl GitHubClient {
             page += 1;
         }
 
-        // Fetch reactions for all PRs in parallel (like Promise.all in TypeScript)
         let reaction_futures: Vec<_> = all_pulls
             .iter()
             .map(|pr| self.get_pr_reactions(owner, repo, pr.number))
@@ -109,7 +108,6 @@ impl GitHubClient {
 
         let reactions_results = futures::future::join_all(reaction_futures).await;
 
-        // Combine PRs with their reactions
         let mut pulls: Vec<PullRequest> = all_pulls
             .into_iter()
             .zip(reactions_results.into_iter())
