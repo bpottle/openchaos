@@ -68,7 +68,7 @@ impl GitHubClient {
         &self,
         owner: &str,
         repo: &str,
-    ) -> Result<Vec<PullRequest>, Box<dyn std::error::Error>> {
+    ) -> Result<Vec<PullRequest>, Box<dyn std::error::Error + Send + Sync>> {
         let mut all_pulls = Vec::new();
         let mut page = 1;
 
@@ -139,7 +139,7 @@ impl GitHubClient {
         owner: &str,
         repo: &str,
         pr_number: u32,
-    ) -> Result<Reactions, Box<dyn std::error::Error>> {
+    ) -> Result<Reactions, Box<dyn std::error::Error + Send + Sync>> {
         let mut all_reactions = Vec::new();
         let mut page = 1;
 

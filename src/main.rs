@@ -27,6 +27,7 @@ struct RepoQuery {
     repo: String,
 }
 
+#[axum::debug_handler]
 async fn get_pull_requests(Query(params): Query<RepoQuery>) -> Json<PRResponse> {
     let client = GitHubClient::new();
     
