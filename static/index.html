@@ -20,20 +20,20 @@
             <h3>Built with Rust</h3>
             <div class="performance-stats">
                 <div class="stat-item">
-                    <div class="stat-value">~5MB</div>
+                    <div class="stat-value" id="stat-binary-size">~5MB</div>
                     <div class="stat-label">Binary Size</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">&lt;10ms</div>
-                    <div class="stat-label">API Response</div>
+                    <div class="stat-value" id="stat-response-time">&lt;10ms</div>
+                    <div class="stat-label">Avg Response</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">0</div>
+                    <div class="stat-value" id="stat-errors">0</div>
                     <div class="stat-label">Runtime Errors</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">∞</div>
-                    <div class="stat-label">Concurrency</div>
+                    <div class="stat-value" id="stat-uptime">0s</div>
+                    <div class="stat-label">Uptime</div>
                 </div>
             </div>
         </div>
@@ -165,8 +165,51 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
         
-        // Load openchaos repo on page load
-        window.addEventListener('DOMContentLoaded', loadPRs);
+        // Load metrics
+        async function loadMetrics() {
+            try {
+                const response = await fetch('/api/metrics');
+                const data = await response.json();
+                
+                // Update binary size
+                document.getElementById('stat-binary-size').textContent = data.binary_size_formatted;
+                
+                // Update average response time
+                const responseTime = data.avg_response_time_ms;
+                document.getElementById('stat-response-time').textContent = 
+                    responseTime === 0 ? '<1ms' : `${responseTime}ms`;
+                
+                // Update runtime errors
+                document.getElementById('stat-errors').textContent = data.total_errors;
+                
+                // Update uptime
+                const uptimeSeconds = data.uptime_seconds;
+                let uptimeText;
+                if (uptimeSeconds < 60) {
+                    uptimeText = `${uptimeSeconds}s`;
+                } else if (uptimeSeconds < 3600) {
+                    const minutes = Math.floor(uptimeSeconds / 60);
+                    uptimeText = `${minutes}m`;
+                } else if (uptimeSeconds < 86400) {
+                    const hours = Math.floor(uptimeSeconds / 3600);
+                    uptimeText = `${hours}h`;
+                } else {
+                    const days = Math.floor(uptimeSeconds / 86400);
+                    uptimeText = `${days}d`;
+                }
+                document.getElementById('stat-uptime').textContent = uptimeText;
+            } catch (error) {
+                console.error('Error loading metrics:', error);
+            }
+        }
+        
+        // Load openchaos repo and metrics on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadPRs();
+            loadMetrics();
+            // Refresh metrics every 5 seconds
+            setInterval(loadMetrics, 5000);
+        });
     </script>
 </body>
 </html>
