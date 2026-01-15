@@ -10,6 +10,7 @@ interface CursorPoint {
 
 export function CursorTrail() {
   const [cursors, setCursors] = useState<CursorPoint[]>([]);
+  const [emoji, setEmoji] = useState("🦋");
 
   useEffect(() => {
     let cursorId = 0;
@@ -23,21 +24,18 @@ export function CursorTrail() {
 
       setCursors((prev) => [...prev, newCursor]);
 
-      // Remove cursor after animation completes
       setTimeout(() => {
         setCursors((prev) => prev.filter((c) => c.id !== newCursor.id));
       }, 800);
     };
 
-    // Throttle mouse move events for performance
     let throttleTimer: NodeJS.Timeout | null = null;
     const throttledMouseMove = (e: MouseEvent) => {
-      if (!throttleTimer) {
-        throttleTimer = setTimeout(() => {
-          handleMouseMove(e);
-          throttleTimer = null;
-        }, 50);
-      }
+      if (throttleTimer) return;
+      throttleTimer = setTimeout(() => {
+        handleMouseMove(e);
+        throttleTimer = null;
+      }, 50);
     };
 
     window.addEventListener("mousemove", throttledMouseMove);
@@ -46,6 +44,27 @@ export function CursorTrail() {
       window.removeEventListener("mousemove", throttledMouseMove);
       if (throttleTimer) clearTimeout(throttleTimer);
     };
+  }, []);
+
+  useEffect(() => {
+    const code = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    let pos = 0;
+
+    const handleKey = (e: KeyboardEvent) => {
+      const key = e.key.toLowerCase();
+      if (key === code[pos] || e.key === code[pos]) {
+        pos++;
+        if (pos === code.length) {
+          setEmoji("🔫");
+          pos = 0;
+        }
+      } else {
+        pos = 0;
+      }
+    };
+
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
   }, []);
 
   return (
@@ -63,7 +82,7 @@ export function CursorTrail() {
             userSelect: "none"
           }}
         >
-          🦋
+          {emoji}
         </div>
       ))}
     </div>
