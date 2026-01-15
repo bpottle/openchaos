@@ -12,18 +12,21 @@ export function TreeGame() {
     if (!isOpen) return;
 
     const handleKeyPress = (e: KeyboardEvent) => {
-      const newSequence = (keySequence + e.key.toLowerCase()).slice(-3);
-      setKeySequence(newSequence);
-      
-      if (newSequence === "win") {
-        setShowDebug((prev) => !prev);
-        setKeySequence(""); // Reset after toggle
-      }
+      setKeySequence((prev) => {
+        const newSequence = (prev + e.key.toLowerCase()).slice(-3);
+        
+        if (newSequence === "win") {
+          setShowDebug((prevDebug) => !prevDebug);
+          return "";
+        }
+        
+        return newSequence;
+      });
     };
 
     window.addEventListener("keypress", handleKeyPress);
     return () => window.removeEventListener("keypress", handleKeyPress);
-  }, [isOpen, keySequence]);
+  }, [isOpen]);
 
   const handleImageClick = (e: React.MouseEvent<HTMLImageElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();

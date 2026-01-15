@@ -1,10 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-
 export function WebCounter() {
-  // Start at the classic 1337 (leet)
-  const [count, setCount] = useState<number>(1337);
+  const count = 1337;
 
   // wtf was I thinking, don't increment the counter live, but... leave this here in case I want it later
   // useEffect(() => {
@@ -21,10 +18,10 @@ export function WebCounter() {
   //   incrementCounter();
   // }, []);
 
-  // Format count to have leading zeros (6 digits)
+  // Format leading zeros
   const formattedCount = count.toString().padStart(6, "0");
   
-  // Split into individual digits for classic counter display
+  // Split for each "cell"
   const digits = formattedCount.split("");
 
   return (

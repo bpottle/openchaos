@@ -19,12 +19,9 @@ export function StatusBar() {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageIndex, setMessageIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
-  const [isScrolling, setIsScrolling] = useState(true);
 
   // Scroll through messages character by character
   useEffect(() => {
-    if (!isScrolling) return;
-
     const message = STATUS_MESSAGES[messageIndex];
     
     if (charIndex < message.length) {
@@ -42,7 +39,7 @@ export function StatusBar() {
       }, 1337);
       return () => clearTimeout(timer);
     }
-  }, [charIndex, messageIndex, isScrolling]);
+  }, [charIndex, messageIndex]);
 
   return (
     <div className="status-bar">
