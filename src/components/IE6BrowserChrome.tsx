@@ -14,7 +14,7 @@ export function IE6BrowserChrome({ children }: IE6BrowserChromeProps) {
         <div className="ie6-titlebar-left">
           <img 
             src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23fff' d='M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM3.5 8a4.5 4.5 0 0 1 8.59-1.91l-2.24.75A2 2 0 1 0 8 10a2 2 0 0 0 1.85-1.23l2.24-.75A4.5 4.5 0 0 1 3.5 8z'/%3E%3C/svg%3E" 
-            alt="IE" 
+            alt="Internet Explorer icon" 
             className="ie6-titlebar-icon"
           />
           <span className="ie6-titlebar-text">Microsoft Internet Explorer</span>

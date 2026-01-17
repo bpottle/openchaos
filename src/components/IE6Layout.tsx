@@ -112,22 +112,22 @@ export function IE6Layout({ children }: IE6LayoutProps) {
                       <td className="ie6-footer-cell" style={{ textAlign: "center", padding: "10px" }}>
                         <div style={{ display: "flex", justifyContent: "center", gap: "8px", flexWrap: "wrap" }}>
                           <a href="https://blog.openchaos.dev/" target="_blank" rel="noopener noreferrer">
-                            <img src="/buttons/2cows.gif" alt="2 Cows" width="88" height="31" />
+                            <img src="/buttons/2cows.gif" alt="2 Cows and a Chicken button - visit our site" width="88" height="31" />
                           </a>
                           <a href="https://blog.openchaos.dev/" target="_blank" rel="noopener noreferrer">
-                            <img src="/buttons/3dkingdom.gif" alt="3D Kingdom" width="88" height="31" />
+                            <img src="/buttons/3dkingdom.gif" alt="3D Kingdom button - visit our site" width="88" height="31" />
                           </a>
                           <a href="https://blog.openchaos.dev/" target="_blank" rel="noopener noreferrer">
-                            <img src="/buttons/angelfire.gif" alt="Angelfire" width="88" height="31" />
+                            <img src="/buttons/angelfire.gif" alt="Angelfire hosting button" width="88" height="31" />
                           </a>
                           <a href="https://blog.openchaos.dev/" target="_blank" rel="noopener noreferrer">
-                            <img src="/buttons/FreewareGuide.gif" alt="Freeware Guide" width="88" height="31" />
+                            <img src="/buttons/FreewareGuide.gif" alt="Freeware Guide button" width="88" height="31" />
                           </a>
                           <a href="https://blog.openchaos.dev/" target="_blank" rel="noopener noreferrer">
-                            <img src="/buttons/geocitieswww.gif" alt="Geocities" width="88" height="31" />
+                            <img src="/buttons/geocitieswww.gif" alt="GeoCities web hosting button" width="88" height="31" />
                           </a>
                           <a href="https://blog.openchaos.dev/" target="_blank" rel="noopener noreferrer">
-                            <img src="/buttons/lycos.gif" alt="Lycos" width="88" height="31" />
+                            <img src="/buttons/lycos.gif" alt="Lycos search engine button" width="88" height="31" />
                           </a>
                         </div>
                       </td>

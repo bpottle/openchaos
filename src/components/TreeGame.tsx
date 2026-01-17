@@ -78,9 +78,13 @@ export function TreeGame() {
                     <div style={{ position: 'relative', display: 'inline-block' }}>
                       <img 
                         src="/tree.png" 
-                        alt="Click the right leaf!"
+                        alt="Tree with leaves - find and click the winning leaf to win $1 million"
                         className="tree-game-image"
                         onClick={handleImageClick}
+                        onError={(e) => {
+                          e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%23ccffcc'/%3E%3Ctext x='200' y='200' text-anchor='middle' font-family='Comic Sans MS' font-size='20' fill='%23ff0000'%3EImage failed to load!%3C/text%3E%3C/svg%3E";
+                          e.currentTarget.style.cursor = 'default';
+                        }}
                         style={{ cursor: 'pointer', maxWidth: '100%', display: 'block' }}
                       />
                       {/* Winning zone overlay - Type "w-i-n" to toggle */}

@@ -3,21 +3,6 @@
 export function WebCounter() {
   const count = 1337;
 
-  // wtf was I thinking, don't increment the counter live, but... leave this here in case I want it later
-  // useEffect(() => {
-  //   const incrementCounter = () => {
-  //     // Random delay between 3-7 seconds (3000-7000ms)
-  //     const randomDelay = Math.floor(Math.random() * 4000) + 3000;
-  //     
-  //     setTimeout(() => {
-  //       setCount((prev) => prev + 1);
-  //       incrementCounter(); // Schedule next increment
-  //     }, randomDelay);
-  //   };
-
-  //   incrementCounter();
-  // }, []);
-
   // Format leading zeros
   const formattedCount = count.toString().padStart(6, "0");
   

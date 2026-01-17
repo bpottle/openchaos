@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-function getNextSunday8PM(): Date {
+function getNextSundayMergeTime(): Date {
   const now = new Date();
   const target = new Date(now);
 
@@ -10,7 +10,7 @@ function getNextSunday8PM(): Date {
   const daysUntilSunday = (7 - now.getUTCDay()) % 7;
   target.setUTCDate(now.getUTCDate() + (daysUntilSunday === 0 ? 7 : daysUntilSunday));
 
-  // Set to 09:00 UTC
+  // Set to 09:00 UTC (Sunday morning merge time)
   target.setUTCHours(9, 0, 0, 0);
 
   // If it's Sunday but before 09:00 UTC, use today
@@ -43,7 +43,7 @@ function pad(n: number): string {
 }
 
 export function Countdown() {
-  const [target] = useState(() => getNextSunday8PM());
+  const [target] = useState(() => getNextSundayMergeTime());
   const [time, setTime] = useState(() => getTimeRemaining(target));
   const [mounted, setMounted] = useState(false);
 
