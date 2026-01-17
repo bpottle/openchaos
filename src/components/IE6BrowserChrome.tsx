@@ -21,10 +21,10 @@ export function IE6BrowserChrome({ children }: IE6BrowserChromeProps) {
         </div>
         <div className="ie6-titlebar-buttons">
           <button className="ie6-titlebar-button ie6-minimize">
-            <span>_</span>
+            <span style={{ position: 'relative', top: '-2px' }}>_</span>
           </button>
           <button className="ie6-titlebar-button ie6-maximize">
-            <span>□</span>
+            <span style={{ fontSize: '11px' }}>□</span>
           </button>
           <button className="ie6-titlebar-button ie6-close">
             <span>✕</span>
