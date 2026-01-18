@@ -147,7 +147,7 @@ export function IE6BrowserChrome({ children }: IE6BrowserChromeProps) {
                   if (e.key === 'Enter') {
                     const query = e.currentTarget.value;
                     if (query) {
-                      window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
+                      window.open(`https://www.ask.com/web?q=${encodeURIComponent(query)}`, '_blank');
                     }
                   }
                 }}
@@ -158,7 +158,7 @@ export function IE6BrowserChrome({ children }: IE6BrowserChromeProps) {
                   const input = e.currentTarget.previousElementSibling as HTMLInputElement;
                   const query = input?.value;
                   if (query) {
-                    window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
+                    window.open(`https://www.ask.com/web?q=${encodeURIComponent(query)}`, '_blank');
                   }
                 }}
               >
