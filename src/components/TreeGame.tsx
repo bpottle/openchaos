@@ -1,22 +1,39 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export function TreeGame() {
   const [isOpen, setIsOpen] = useState(false);
   const [showDebug, setShowDebug] = useState(false);
   const [keySequence, setKeySequence] = useState("");
+  const lastToggleTime = useRef(0);
 
   // Handle "w-i-n" key sequence to toggle debug overlay
   useEffect(() => {
+    // console.log("TreeGame effect mounted. isOpen:", isOpen, "showDebug:", showDebug);
     if (!isOpen) return;
 
     const handleKeyPress = (e: KeyboardEvent) => {
+      // console.log("Key pressed:", e.key);
       setKeySequence((prev) => {
         const newSequence = (prev + e.key.toLowerCase()).slice(-3);
+        // console.log("Key sequence:", newSequence);
         
         if (newSequence === "win") {
-          setShowDebug((prevDebug) => !prevDebug);
+          const now = Date.now();
+          // Prevent double-toggling within 100ms
+          if (now - lastToggleTime.current < 100) {
+            // console.log("Ignoring duplicate win sequence");
+            return "";
+          }
+          lastToggleTime.current = now;
+          
+          // console.log("Toggling debug overlay");
+          setShowDebug((prevDebug) => {
+            const newDebug = !prevDebug;
+            // console.log("showDebug toggled to:", newDebug);
+            return newDebug;
+          });
           return "";
         }
         
@@ -24,8 +41,8 @@ export function TreeGame() {
       });
     };
 
-    window.addEventListener("keypress", handleKeyPress);
-    return () => window.removeEventListener("keypress", handleKeyPress);
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
   }, [isOpen]);
 
   const handleImageClick = (e: React.MouseEvent<HTMLImageElement>) => {
@@ -89,6 +106,8 @@ export function TreeGame() {
                       />
                       {/* Winning zone overlay - Type "w-i-n" to toggle */}
                       {showDebug && (
+                        <>
+                        {/* console.log("Rendering debug overlay!") */}
                         <div 
                           style={{
                             position: 'absolute',
@@ -102,6 +121,7 @@ export function TreeGame() {
                           }}
                           title="Winning zone (17-18.25% x, 22-23.25% y)"
                         />
+                        </>
                       )}
                     </div>
                   </td>
