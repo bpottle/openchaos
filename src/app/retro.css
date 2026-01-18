@@ -1007,6 +1007,18 @@
   overflow-x: hidden;
 }
 
+@media (max-height: 700px) {
+  .guestbook-entries-container {
+    max-height: 35vh;
+  }
+}
+
+@media (max-height: 600px) {
+  .guestbook-entries-container {
+    max-height: 25vh;
+  }
+}
+
 .guestbook-entry-table {
   background-color: #ffffff;
   border-color: #0000ff;
