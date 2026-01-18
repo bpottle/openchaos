@@ -195,11 +195,11 @@ export function IE6BrowserChrome({ children }: IE6BrowserChromeProps) {
                 </div>
                 <div className="ie6-favorite-item" onClick={() => window.open('https://www.spacejam.com/1996/', '_blank')}>
                   <span className="ie6-favorite-icon">🏀</span>
-                  <span>Space Jam (1996)</span>
+                  <span>Space Jam!</span>
                 </div>
-                <div className="ie6-favorite-item" onClick={() => window.open('https://www.cameronsworld.net/', '_blank')}>
-                  <span className="ie6-favorite-icon">🌐</span>
-                  <span>Cameron&apos;s World</span>
+                <div className="ie6-favorite-item" onClick={() => window.open('http://www.milliondollarhomepage.com/', '_blank')}>
+                  <span className="ie6-favorite-icon">💰</span>
+                  <span>Million Dollar Homepage</span>
                 </div>
                 <div className="ie6-favorite-item" onClick={() => window.open('https://www.zombo.com/', '_blank')}>
                   <span className="ie6-favorite-icon">⚡</span>
