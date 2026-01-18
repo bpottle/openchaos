@@ -1,12 +1,43 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface IE6BrowserChromeProps {
   children: ReactNode;
 }
 
 export function IE6BrowserChrome({ children }: IE6BrowserChromeProps) {
+  const router = useRouter();
+  const [showSearchPanel, setShowSearchPanel] = useState(false);
+  const [showFavoritesPanel, setShowFavoritesPanel] = useState(false);
+
+  const handleBack = () => {
+    window.history.back();
+  };
+
+  const handleForward = () => {
+    window.history.forward();
+  };
+
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
+  const handleHome = () => {
+    router.push('/');
+  };
+
+  const handleSearch = () => {
+    setShowSearchPanel(!showSearchPanel);
+    setShowFavoritesPanel(false);
+  };
+
+  const handleFavorites = () => {
+    setShowFavoritesPanel(!showFavoritesPanel);
+    setShowSearchPanel(false);
+  };
+
   return (
     <div className="ie6-browser-window">
       {/* Window Title Bar */}
@@ -45,11 +76,11 @@ export function IE6BrowserChrome({ children }: IE6BrowserChromeProps) {
       {/* Navigation Toolbar */}
       <div className="ie6-toolbar">
         <div className="ie6-toolbar-buttons">
-          <button className="ie6-toolbar-button" title="Back">
+          <button className="ie6-toolbar-button" title="Back" onClick={handleBack}>
             <span className="ie6-button-icon">◀</span>
             <span className="ie6-button-label">Back</span>
           </button>
-          <button className="ie6-toolbar-button" title="Forward">
+          <button className="ie6-toolbar-button" title="Forward" onClick={handleForward}>
             <span className="ie6-button-icon">▶</span>
             <span className="ie6-button-label">Forward</span>
           </button>
@@ -57,22 +88,30 @@ export function IE6BrowserChrome({ children }: IE6BrowserChromeProps) {
             <span className="ie6-button-icon">✕</span>
             <span className="ie6-button-label">Stop</span>
           </button>
-          <button className="ie6-toolbar-button" title="Refresh">
+          <button className="ie6-toolbar-button" title="Refresh" onClick={handleRefresh}>
             <span className="ie6-button-icon">⟳</span>
             <span className="ie6-button-label">Refresh</span>
           </button>
-          <button className="ie6-toolbar-button" title="Home">
+          <button className="ie6-toolbar-button" title="Home" onClick={handleHome}>
             <span className="ie6-button-icon">🏠</span>
             <span className="ie6-button-label">Home</span>
           </button>
         </div>
         <div className="ie6-separator"></div>
         <div className="ie6-toolbar-buttons">
-          <button className="ie6-toolbar-button" title="Search">
+          <button 
+            className={`ie6-toolbar-button ${showSearchPanel ? 'active' : ''}`}
+            title="Search" 
+            onClick={handleSearch}
+          >
             <span className="ie6-button-icon">🔍</span>
             <span className="ie6-button-label">Search</span>
           </button>
-          <button className="ie6-toolbar-button" title="Favorites">
+          <button 
+            className={`ie6-toolbar-button ${showFavoritesPanel ? 'active' : ''}`}
+            title="Favorites" 
+            onClick={handleFavorites}
+          >
             <span className="ie6-button-icon">⭐</span>
             <span className="ie6-button-label">Favorites</span>
           </button>
@@ -89,9 +128,91 @@ export function IE6BrowserChrome({ children }: IE6BrowserChromeProps) {
         <button className="ie6-addressbar-go">Go</button>
       </div>
 
-      {/* Content Area */}
-      <div className="ie6-content-area">
-        {children}
+      {/* Content Area with Side Panels */}
+      <div className="ie6-content-wrapper">
+        {/* Search Panel */}
+        {showSearchPanel && (
+          <div className="ie6-side-panel">
+            <div className="ie6-panel-header">
+              <span>Search</span>
+              <button className="ie6-panel-close" onClick={() => setShowSearchPanel(false)}>✕</button>
+            </div>
+            <div className="ie6-panel-content">
+              <p style={{ fontSize: '11px', marginBottom: '8px' }}>Find it on the web...</p>
+              <input 
+                type="text" 
+                placeholder="Enter search terms" 
+                className="ie6-search-input"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    const query = e.currentTarget.value;
+                    if (query) {
+                      window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
+                    }
+                  }
+                }}
+              />
+              <button 
+                className="ie6-search-button"
+                onClick={(e) => {
+                  const input = e.currentTarget.previousElementSibling as HTMLInputElement;
+                  const query = input?.value;
+                  if (query) {
+                    window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
+                  }
+                }}
+              >
+                Search
+              </button>
+              <div style={{ marginTop: '16px', fontSize: '11px', color: '#666' }}>
+                <p><strong>Popular Search Engines:</strong></p>
+                <ul style={{ listStyle: 'none', padding: '8px 0' }}>
+                  <li><a href="https://www.google.com" target="_blank" rel="noopener noreferrer">Google</a></li>
+                  <li><a href="https://www.bing.com" target="_blank" rel="noopener noreferrer">Bing</a></li>
+                  <li><a href="https://duckduckgo.com" target="_blank" rel="noopener noreferrer">DuckDuckGo</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Favorites Panel */}
+        {showFavoritesPanel && (
+          <div className="ie6-side-panel">
+            <div className="ie6-panel-header">
+              <span>Favorites</span>
+              <button className="ie6-panel-close" onClick={() => setShowFavoritesPanel(false)}>✕</button>
+            </div>
+            <div className="ie6-panel-content">
+              <div className="ie6-favorites-list">
+                <div className="ie6-favorite-item" onClick={() => router.push('/')}>
+                  <span className="ie6-favorite-icon">🏠</span>
+                  <span>OpenChaos Home</span>
+                </div>
+                <div className="ie6-favorite-item" onClick={() => window.open('https://github.com/bpottle/openchaos', '_blank')}>
+                  <span className="ie6-favorite-icon">📁</span>
+                  <span>GitHub Repository</span>
+                </div>
+                <div className="ie6-favorite-item" onClick={() => window.open('https://www.spacejam.com/1996/', '_blank')}>
+                  <span className="ie6-favorite-icon">🏀</span>
+                  <span>Space Jam (1996)</span>
+                </div>
+                <div className="ie6-favorite-item" onClick={() => window.open('https://www.cameronsworld.net/', '_blank')}>
+                  <span className="ie6-favorite-icon">🌐</span>
+                  <span>Cameron&apos;s World</span>
+                </div>
+                <div className="ie6-favorite-item" onClick={() => window.open('https://www.zombo.com/', '_blank')}>
+                  <span className="ie6-favorite-icon">⚡</span>
+                  <span>Zombocom</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="ie6-content-area">
+          {children}
+        </div>
       </div>
     </div>
   );
