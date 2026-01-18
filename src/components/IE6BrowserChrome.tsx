@@ -167,9 +167,11 @@ export function IE6BrowserChrome({ children }: IE6BrowserChromeProps) {
               <div style={{ marginTop: '16px', fontSize: '11px', color: '#666' }}>
                 <p><strong>Popular Search Engines:</strong></p>
                 <ul style={{ listStyle: 'none', padding: '8px 0' }}>
-                  <li><a href="https://www.google.com" target="_blank" rel="noopener noreferrer">Google</a></li>
-                  <li><a href="https://www.bing.com" target="_blank" rel="noopener noreferrer">Bing</a></li>
-                  <li><a href="https://duckduckgo.com" target="_blank" rel="noopener noreferrer">DuckDuckGo</a></li>
+                  <li><a href="https://www.yahoo.com" target="_blank" rel="noopener noreferrer">Yahoo</a></li>
+                  <li><a href="https://www.altavista.com" target="_blank" rel="noopener noreferrer">AltaVista</a></li>
+                  <li><a href="https://www.lycos.com" target="_blank" rel="noopener noreferrer">Lycos</a></li>
+                  <li><a href="https://www.excite.com" target="_blank" rel="noopener noreferrer">Excite</a></li>
+                  <li><a href="https://www.dogpile.com" target="_blank" rel="noopener noreferrer">Dogpile</a></li>
                 </ul>
               </div>
             </div>
