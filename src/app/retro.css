@@ -353,6 +353,7 @@
   padding: 0;
   line-height: 1;
   font-weight: bold;
+  margin-top: -1px;
 }
 
 .ie6-panel-close:hover {
