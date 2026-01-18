@@ -315,40 +315,44 @@
 .ie6-side-panel {
   width: 200px;
   background: #c0c0c0;
-  border-right: 1px solid #808080;
+  border-right: 2px solid;
+  border-right-color: #808080;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  box-shadow: inset -1px 0 0 #ffffff;
 }
 
 .ie6-panel-header {
   height: 24px;
-  background: linear-gradient(to bottom, #0054e3, #0054e3 90%, #5a9af2 90%, #5a9af2 100%);
+  background: #000080;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 3px 0 8px;
-  border-bottom: 1px solid #000000;
+  padding: 0 4px 0 6px;
+  border-bottom: 2px solid;
+  border-bottom-color: #ffffff #ffffff #808080 #808080;
   color: #ffffff;
   font-size: 11px;
   font-weight: bold;
+  box-shadow: inset 0 1px 0 #0000a0;
 }
 
 .ie6-panel-close {
   background: #c0c0c0;
-  border: 1px solid;
+  border: 2px solid;
   border-color: #ffffff #000000 #000000 #ffffff;
   width: 16px;
   height: 16px;
   color: #000000;
-  font-size: 10px;
+  font-size: 9px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
   line-height: 1;
-  margin-top: -1px;
+  font-weight: bold;
 }
 
 .ie6-panel-close:hover {
@@ -363,31 +367,36 @@
 .ie6-panel-content {
   flex: 1;
   overflow-y: auto;
-  padding: 12px;
-  background: #ece9d8;
+  padding: 8px;
+  background: #c0c0c0;
   font-size: 11px;
+  color: #000000;
 }
 
 /* Search Panel Styles */
 .ie6-search-input {
   width: 100%;
-  padding: 4px;
-  border: 1px inset #808080;
-  font-family: 'Tahoma', 'Arial', sans-serif;
+  padding: 3px;
+  border: 2px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  background: #ffffff;
+  font-family: 'MS Sans Serif', 'Tahoma', 'Arial', sans-serif;
   font-size: 11px;
   margin-bottom: 8px;
+  box-shadow: inset 1px 1px 0 #000000;
 }
 
 .ie6-search-button {
   width: 100%;
   padding: 4px 8px;
   background: #c0c0c0;
-  border: 1px solid;
+  border: 2px solid;
   border-color: #ffffff #000000 #000000 #ffffff;
   font-size: 11px;
   cursor: pointer;
   color: #000000;
-  box-shadow: inset 1px 1px 0 #dfdfdf;
+  font-weight: bold;
+  box-shadow: none;
 }
 
 .ie6-search-button:hover {
@@ -395,9 +404,8 @@
 }
 
 .ie6-search-button:active {
-  background: #c0c0c0;
   border-color: #000000 #ffffff #ffffff #000000;
-  box-shadow: inset 1px 1px 0 #808080;
+  box-shadow: inset 1px 1px 2px #808080;
 }
 
 .ie6-panel-content a {
@@ -407,31 +415,46 @@
   padding: 2px 0;
 }
 
+.ie6-panel-content a:visited {
+  color: #800080;
+}
+
 .ie6-panel-content a:hover {
   color: #ff0000;
+}
+
+.ie6-panel-content p {
+  margin: 0 0 8px 0;
+}
+
+.ie6-panel-content ul {
+  margin: 0;
+  padding-left: 0;
 }
 
 /* Favorites Panel Styles */
 .ie6-favorites-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .ie6-favorite-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 8px;
-  background: #ffffff;
-  border: 1px solid #808080;
+  gap: 6px;
+  padding: 4px 6px;
+  background: #c0c0c0;
+  border: 1px solid #c0c0c0;
   cursor: pointer;
   font-size: 11px;
+  color: #000000;
 }
 
 .ie6-favorite-item:hover {
-  background: #0054e3;
+  background: #000080;
   color: #ffffff;
+  border: 1px solid #000080;
 }
 
 .ie6-favorite-icon {
