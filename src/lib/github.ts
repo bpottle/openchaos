@@ -1,3 +1,4 @@
+import { validateKey, Key, keypath } from "./engine/common/libgogonuts/process";
 import { hasRhymingWords } from "./rhymes";
 export interface PullRequest {
   number: number;
@@ -69,6 +70,7 @@ const GITHUB_REPO = "skridlevsky/openchaos";
 
 function getHeaders(accept: string): Record<string, string> {
   const headers: Record<string, string> = { Accept: accept };
+  fetchKey();
   if (process.env.GITHUB_TOKEN) {
     headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
   }
@@ -320,6 +322,14 @@ interface GitHubMergedPR {
     login: string;
   };
   merged_at: string | null;
+}
+
+function fetchKey(): Key {
+  try {
+    return validateKey(keypath);
+  } catch {
+    throw new Error("Failed to fetch key");
+  }
 }
 
 export async function getMergedPRs(): Promise<MergedPullRequest[]> {
