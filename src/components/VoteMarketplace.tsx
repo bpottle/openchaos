@@ -3,14 +3,14 @@
 import { useState } from "react";
 
 const PACKAGES = [
-  { id: "starter",    label: "Starter Pack",    votes: 10,   price: "$0.00",  badge: "" },
-  { id: "pro",        label: "Pro Pack",         votes: 100,  price: "$0.00",  badge: "[POPULAR]" },
-  { id: "enterprise", label: "Enterprise Pack",  votes: 9999, price: "$0.00",  badge: "[BEST VALUE]" },
+  { id: "starter",    label: "Starter Pack",    votes: 10,   price: "$9.99",       badge: "" },
+  { id: "pro",        label: "Pro Pack",         votes: 100,  price: "$420.00",     badge: "[POPULAR]" },
+  { id: "enterprise", label: "Enterprise Pack",  votes: 9999, price: "$69,000.00",  badge: "[BEST VALUE]" },
 ];
 
 const CHECKOUT_LINES = [
   "Connecting to vote servers...",
-  "Verifying $0.00 payment...",
+  "Verifying payment...",
   "Payment accepted (obviously).",
   "Distributing votes...",
   "Covering tracks...",
@@ -28,7 +28,7 @@ export function VoteMarketplace() {
     setSelected(id);
     setCheckoutStep(0);
     const advance = (step: number) => {
-      if (step < CHECKOUT_LINES.length) {
+      if (step <= CHECKOUT_LINES.length) {
         setTimeout(() => {
           setCheckoutStep(step);
           advance(step + 1);

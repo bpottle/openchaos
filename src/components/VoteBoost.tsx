@@ -31,7 +31,7 @@ const INFLUENCERS = [
 const BOOST_CONFIRMATIONS = [
   "Boost applied! (server-side, trust us)",
   "Votes incoming... any second now...",
-  "Your $0.00 payment was processed. Very successfully.",
+  "Your payment was processed. Very successfully.",
   "Boosted! We emailed everyone. All of them.",
   "Done! Your PR is now algorithmically preferred.",
   "Transaction complete. Blockchain updated. Definitely.",
@@ -40,6 +40,14 @@ const BOOST_CONFIRMATIONS = [
 
 function pickRandom<T>(arr: T[], seed: number): T {
   return arr[seed % arr.length];
+}
+
+function randomBoostPrice(prNumber: number): string {
+  // Seeded pseudo-random between $1.00 and $2.00 so it's stable per PR
+  const cents = ((prNumber * 37 + 91) % 101); // 0–100 cents
+  const dollars = 1 + Math.floor(cents / 100);
+  const remainder = cents % 100;
+  return `$${dollars}.${remainder.toString().padStart(2, "0")}`;
 }
 
 export function VoteBoost({ prNumber }: VoteBoostProps) {
@@ -52,6 +60,7 @@ export function VoteBoost({ prNumber }: VoteBoostProps) {
   const aiOpinion = pickRandom(AI_OPINIONS, seed);
   const influencer = pickRandom(INFLUENCERS, seed + 3);
   const boostConfirm = pickRandom(BOOST_CONFIRMATIONS, seed + 5);
+  const boostPrice = randomBoostPrice(prNumber);
 
   const handleBoost = () => {
     if (boostStatus !== "idle") return;
@@ -89,7 +98,7 @@ export function VoteBoost({ prNumber }: VoteBoostProps) {
             padding: "1px 5px",
           }}
         >
-          ⚡ Boost this PR for $0.00
+          ⚡ Boost this PR for {boostPrice}
         </button>
       )}
       {boostStatus === "processing" && (
