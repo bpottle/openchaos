@@ -42,12 +42,10 @@ function pickRandom<T>(arr: T[], seed: number): T {
   return arr[seed % arr.length];
 }
 
-function randomBoostPrice(prNumber: number): string {
-  // Seeded pseudo-random between $1.00 and $2.00 so it's stable per PR
-  const cents = ((prNumber * 37 + 91) % 101); // 0–100 cents
+function boostPrice(prNumber: number): string {
+  const cents = (prNumber * 37 + 91) % 101;
   const dollars = 1 + Math.floor(cents / 100);
-  const remainder = cents % 100;
-  return `$${dollars}.${remainder.toString().padStart(2, "0")}`;
+  return `$${dollars}.${(cents % 100).toString().padStart(2, "0")}`;
 }
 
 export function VoteBoost({ prNumber }: VoteBoostProps) {
@@ -60,7 +58,7 @@ export function VoteBoost({ prNumber }: VoteBoostProps) {
   const aiOpinion = pickRandom(AI_OPINIONS, seed);
   const influencer = pickRandom(INFLUENCERS, seed + 3);
   const boostConfirm = pickRandom(BOOST_CONFIRMATIONS, seed + 5);
-  const boostPrice = randomBoostPrice(prNumber);
+  const price = boostPrice(prNumber);
 
   const handleBoost = () => {
     if (boostStatus !== "idle") return;
@@ -84,7 +82,6 @@ export function VoteBoost({ prNumber }: VoteBoostProps) {
       <span style={{ opacity: 0.6 }}>SPONSORED</span>
       {" · "}
 
-      {/* Boost button */}
       {boostStatus === "idle" && (
         <button
           onClick={handleBoost}
@@ -98,7 +95,7 @@ export function VoteBoost({ prNumber }: VoteBoostProps) {
             padding: "1px 5px",
           }}
         >
-          ⚡ Boost this PR for {boostPrice}
+          ⚡ Boost this PR for {price}
         </button>
       )}
       {boostStatus === "processing" && (
@@ -110,7 +107,6 @@ export function VoteBoost({ prNumber }: VoteBoostProps) {
 
       {" · "}
 
-      {/* AI endorsement */}
       {!showAI ? (
         <button
           onClick={() => setShowAI(true)}
@@ -128,12 +124,11 @@ export function VoteBoost({ prNumber }: VoteBoostProps) {
           [Get AI Opinion]
         </button>
       ) : (
-        <span>🤖 {aiOpinion}</span>
+        <span>{aiOpinion}</span>
       )}
 
       {" · "}
 
-      {/* Influencer endorsement */}
       {!showInfluencer ? (
         <button
           onClick={() => setShowInfluencer(true)}
@@ -151,7 +146,7 @@ export function VoteBoost({ prNumber }: VoteBoostProps) {
           [Get Influencer Endorsement]
         </button>
       ) : (
-        <span>⭐ {influencer}</span>
+        <span>{influencer}</span>
       )}
     </div>
   );

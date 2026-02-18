@@ -79,8 +79,7 @@ export function VoteMarketplace() {
       </div>
 
       <div style={{ opacity: 0.7, marginBottom: "8px" }}>
-        Tired of earning votes the old-fashioned way? Upgrade your PR&apos;s democratic standing today.
-        All packages are FREE (for a limited time — offer expires never).
+        Why earn votes when you can buy them? Prices are per PR, non-negotiable, and completely made up.
       </div>
 
       {!selected && (
@@ -137,11 +136,10 @@ export function VoteMarketplace() {
           {isDone && (
             <div style={{ marginTop: "8px" }}>
               <span style={{ fontWeight: "bold" }}>✅ Transaction complete.</span>
-              {" "}Your votes are on the way.*
+              {" "}Your votes will arrive shortly.*
               <br />
               <span style={{ opacity: 0.5, fontSize: "10px" }}>
-                *Vote delivery is non-binding, theoretical, and subject to the laws of physics.
-                No refunds. No votes. No regrets.
+                *shortly is defined as never. no refunds.
               </span>
               <br />
               <button
@@ -165,9 +163,7 @@ export function VoteMarketplace() {
       )}
 
       <div style={{ marginTop: "10px", opacity: 0.45, fontSize: "10px" }}>
-        OpenChaos VoteMarketplace™ is not affiliated with democracy. Results not guaranteed.
-        Votes are purely cosmetic and have absolutely no effect on the outcome.
-        Void where prohibited by common sense.
+        not a real store. votes do nothing. void where prohibited.
       </div>
     </div>
   );
