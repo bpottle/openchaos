@@ -6,6 +6,7 @@ import { PRList } from "@/components/PRList";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { HallOfChaos } from "@/components/HallOfChaos";
 import { AuthButton } from "@/components/AuthButton";
+import { VoteMarketplace } from "@/components/VoteMarketplace";
 const title = `
   ___                 ___ _                
  / _ \\ _ __  ___ _ _ / __| |_  __ _ ___ ___
@@ -32,6 +33,7 @@ export default function Home() {
             8===D (‿|‿)
           </pre>
           <br />
+          <VoteMarketplace />
           <Suspense
             fallback={
               <div>

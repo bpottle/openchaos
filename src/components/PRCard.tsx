@@ -6,6 +6,7 @@ import { hasRhymingWords } from "@/lib/rhymes";
 import { TimeAgo } from "./TimeAgo";
 import { useAuth } from "@/hooks/useAuth";
 import { soundPlayer } from "@/utils/sounds";
+import { VoteBoost } from "./VoteBoost";
 
 interface PRCardProps {
   pr: PullRequest;
@@ -359,6 +360,9 @@ export function PRCard({ pr, distinguishLeading = true }: PRCardProps) {
         )}
         {(!pr.isMergeable || !pr.checksPassed) && " "}
       </div>
+
+      {/* Vote Boost panel */}
+      <VoteBoost prNumber={pr.number} />
     </div>
   );
 }
