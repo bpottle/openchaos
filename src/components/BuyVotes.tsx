@@ -8,7 +8,7 @@ const TIERS = [
     name: "Bronze Booster",
     price: "$4.99",
     votes: 5,
-    perks: ["5 bonus votes", "Your PR displayed in slightly bolder font", "A warm feeling inside"],
+    perks: ["Your PR displayed in slightly bolder font", "Bragging rights over anyone who voted for free", "A receipt"],
     color: "#cd7f32",
     gradient: "linear-gradient(to bottom, #e8a04a 0%, #cd7f32 100%)",
     borderColor: "#a0601a",
@@ -19,7 +19,7 @@ const TIERS = [
     name: "Silver Syndicate",
     price: "$19.99",
     votes: 25,
-    perks: ["25 bonus votes", "Unofficial 'Trusted Contributor' badge*", "Priority support** via Discord"],
+    perks: ["Unofficial 'Trusted Contributor' badge*", "Priority support** via Discord", "5x the votes of the Bronze tier (this is just math)"],
     color: "#aaa9ad",
     gradient: "linear-gradient(to bottom, #d0cfcf 0%, #9a9999 100%)",
     borderColor: "#777",
@@ -30,7 +30,7 @@ const TIERS = [
     name: "Gold Grabber",
     price: "$49.99",
     votes: 100,
-    perks: ["100 bonus votes", "Your name in the Hall of Chaos***", "Exclusive 'I Paid For This' flair"],
+    perks: ["Your name in the Hall of Chaos***", "Exclusive 'I Paid For This' flair", "The satisfaction of having spent $49.99 on a voting contest"],
     color: "#e6a817",
     gradient: "linear-gradient(to bottom, #f5c842 0%, #e6a817 100%)",
     borderColor: "#b07800",
@@ -43,10 +43,10 @@ const TIERS = [
     price: "$199.99",
     votes: 500,
     perks: [
-      "500 bonus votes",
       "The maintainer will consider learning your name",
       "Custom cursor on your PRs****",
       "Exclusive Discord role: 'Financially Compromised'",
+      "20x the votes of the Bronze tier (still just math)",
     ],
     color: "#b9f2ff",
     gradient: "linear-gradient(to bottom, #e0f8ff 0%, #a0e8f8 100%)",
@@ -71,7 +71,6 @@ export function BuyVotes() {
 
   const handleBuy = (tierId: string) => {
     setSelectedTier(tierId);
-    setConfirmed(false);
   };
 
   const handleConfirm = () => {
