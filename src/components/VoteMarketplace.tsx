@@ -73,7 +73,7 @@ export function VoteMarketplace() {
       <div style={{ fontWeight: "bold", marginBottom: "6px" }}>
         ╔═══════════════════════════════════════════╗
         <br />
-        |&nbsp;&nbsp;&nbsp;&nbsp;🗳️ VOTE MARKETPLACE — BUY VOTES NOW&nbsp;&nbsp;&nbsp;&nbsp;|
+        ║&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VOTE MARKETPLACE — BUY VOTES NOW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;║
         <br />
         ╚═══════════════════════════════════════════╝
       </div>

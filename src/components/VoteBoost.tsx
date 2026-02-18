@@ -9,11 +9,11 @@ interface VoteBoostProps {
 type BoostStatus = "idle" | "processing" | "done";
 
 const AI_OPINIONS = [
-  "AI thinks this PR is FIRE 🔥",
-  "AI says: 10/10, no notes 🤖",
-  "AI gave this PR a standing ovation 👏",
+  "AI thinks this PR is FIRE",
+  "AI says: 10/10, no notes",
+  "AI gave this PR a standing ovation",
   "AI has reviewed all 14 billion PRs in existence. This is #1.",
-  "AI sentiment: EXTREMELY BULLISH 📈",
+  "AI sentiment: EXTREMELY BULLISH",
   "AI confidence score: 99.97% (rounding error not our fault)",
   "Our AI wept. In a good way.",
 ];
