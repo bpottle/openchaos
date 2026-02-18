@@ -2432,6 +2432,445 @@ center {
   box-shadow: 0 8px 32px rgba(0,0,0,0.5);
 }
 
+/* ===== BUY VOTES — WEB 2.0 STYLE ===== */
+
+.buy-votes-section {
+  margin-bottom: 24px;
+}
+
+.buy-votes-new-badge {
+  display: inline-block;
+  background: linear-gradient(to bottom, #e74c3c 0%, #c0392b 100%);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+  margin-left: 8px;
+  letter-spacing: 1px;
+  vertical-align: middle;
+  border: 1px solid #a0291b;
+  text-transform: uppercase;
+}
+
+.buy-votes-tagline {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+[data-theme="dark"] .buy-votes-tagline {
+  color: #aaa;
+}
+
+.buy-votes-tiers {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.buy-votes-tier {
+  flex: 1;
+  min-width: 140px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.buy-votes-tier:hover {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .buy-votes-tier {
+  background: #2a2a2a;
+}
+
+.buy-votes-tier-popular {
+  box-shadow: 0 4px 16px rgba(230,168,23,0.35);
+}
+
+.buy-votes-popular-ribbon {
+  position: absolute;
+  top: 10px;
+  right: -22px;
+  background: linear-gradient(to bottom, #e67e22 0%, #d35400 100%);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 30px;
+  transform: rotate(45deg);
+  letter-spacing: 1px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  z-index: 1;
+}
+
+.buy-votes-tier-header {
+  padding: 12px 10px 10px;
+  text-align: center;
+  border-bottom: 2px solid #ccc;
+}
+
+.buy-votes-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 2px 8px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.35);
+  margin-bottom: 6px;
+}
+
+.buy-votes-tier-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 4px;
+}
+
+[data-theme="dark"] .buy-votes-tier-name {
+  color: #eee;
+}
+
+.buy-votes-tier-price {
+  font-size: 22px;
+  font-weight: 700;
+  color: #222;
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .buy-votes-tier-price {
+  color: #eee;
+}
+
+.buy-votes-tier-votes {
+  font-size: 11px;
+  color: #555;
+  margin-top: 2px;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .buy-votes-tier-votes {
+  color: #bbb;
+}
+
+.buy-votes-tier-body {
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.buy-votes-perks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px 0;
+  flex: 1;
+}
+
+.buy-votes-perk {
+  font-size: 11px;
+  color: #444;
+  padding: 3px 0;
+  line-height: 1.4;
+}
+
+[data-theme="dark"] .buy-votes-perk {
+  color: #ccc;
+}
+
+.buy-votes-check {
+  color: #28a745;
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.buy-votes-buy-btn {
+  width: 100%;
+  padding: 7px 10px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: #222;
+  cursor: pointer;
+  text-align: center;
+  transition: filter 0.15s, box-shadow 0.15s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.buy-votes-buy-btn:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.buy-votes-buy-btn:active {
+  filter: brightness(0.94);
+}
+
+.buy-votes-disclaimers {
+  margin-top: 8px;
+}
+
+.buy-votes-disclaimer-toggle {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 11px;
+  color: #2a5db0;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.buy-votes-disclaimer-toggle:hover {
+  color: #1a4a90;
+}
+
+[data-theme="dark"] .buy-votes-disclaimer-toggle {
+  color: #5b9bd5;
+}
+
+.buy-votes-disclaimer-list {
+  list-style: none;
+  padding: 8px 0 0 0;
+  margin: 0;
+}
+
+.buy-votes-disclaimer-list li {
+  font-size: 10px;
+  color: #888;
+  line-height: 1.6;
+}
+
+[data-theme="dark"] .buy-votes-disclaimer-list li {
+  color: #777;
+}
+
+/* Modal overlay */
+.buy-votes-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.buy-votes-modal {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  width: 100%;
+  max-width: 380px;
+  overflow: hidden;
+  animation: web2-fade-in 0.2s ease-out;
+}
+
+[data-theme="dark"] .buy-votes-modal {
+  background: #2a2a2a;
+}
+
+.buy-votes-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #222;
+  border-bottom: 2px solid rgba(0,0,0,0.12);
+}
+
+.buy-votes-modal-close {
+  background: linear-gradient(to bottom, #e0e0e0 0%, #c0c0c0 100%);
+  border: 1px solid #999;
+  border-radius: 3px;
+  width: 20px;
+  height: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #444;
+  padding: 0;
+  font-family: inherit;
+}
+
+.buy-votes-modal-close:hover {
+  background: linear-gradient(to bottom, #eee 0%, #ccc 100%);
+}
+
+.buy-votes-modal-body {
+  padding: 16px;
+  font-size: 13px;
+  color: #333;
+  line-height: 1.5;
+}
+
+[data-theme="dark"] .buy-votes-modal-body {
+  color: #ddd;
+}
+
+.buy-votes-modal-note {
+  font-size: 11px;
+  color: #666;
+  margin-top: 6px;
+}
+
+[data-theme="dark"] .buy-votes-modal-note {
+  color: #aaa;
+}
+
+.buy-votes-modal-fake-form {
+  background: #f8f8f8;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 10px 12px;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+[data-theme="dark"] .buy-votes-modal-fake-form {
+  background: #222;
+  border-color: #444;
+}
+
+.buy-votes-modal-fake-form label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+[data-theme="dark"] .buy-votes-modal-fake-form label {
+  color: #999;
+}
+
+.buy-votes-fake-input {
+  width: 100%;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  background: #fff;
+  color: #999;
+  box-sizing: border-box;
+  cursor: default;
+}
+
+[data-theme="dark"] .buy-votes-fake-input {
+  background: #1a1a1a;
+  border-color: #555;
+  color: #666;
+}
+
+.buy-votes-fake-input-sm {
+  width: 50%;
+}
+
+.buy-votes-modal-disclaimer {
+  font-size: 10px;
+  color: #999;
+  line-height: 1.5;
+  font-style: italic;
+  margin-top: 6px;
+}
+
+.buy-votes-modal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.buy-votes-confirm-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: #222;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.buy-votes-confirm-btn:hover {
+  filter: brightness(1.08);
+}
+
+.buy-votes-cancel-btn {
+  padding: 8px 14px;
+  background: linear-gradient(to bottom, #f0f0f0 0%, #ddd 100%);
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 12px;
+  color: #444;
+  cursor: pointer;
+}
+
+.buy-votes-cancel-btn:hover {
+  background: linear-gradient(to bottom, #fafafa 0%, #e8e8e8 100%);
+}
+
+[data-theme="dark"] .buy-votes-cancel-btn {
+  background: linear-gradient(to bottom, #444 0%, #333 100%);
+  border-color: #555;
+  color: #ccc;
+}
+
+/* Success modal */
+.buy-votes-success-modal {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.buy-votes-success-icon {
+  font-size: 40px;
+  color: #28a745;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.buy-votes-success-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #28a745;
+  margin-bottom: 10px;
+}
+
+.buy-votes-success-body {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.6;
+}
+
+[data-theme="dark"] .buy-votes-success-body {
+  color: #aaa;
+}
+
 /* ===== RESPONSIVE ADJUSTMENTS ===== */
 @media (max-width: 600px) {
   .web2-page-wrapper {

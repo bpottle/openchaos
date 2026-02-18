@@ -107,3 +107,45 @@ pre {
 .vote-button-down {
   border-color: #ff0000;
 }
+
+/* ===== BUY VOTES — ASCII TERMINAL STYLE ===== */
+
+.ascii-buy-votes {
+  margin-top: 2em;
+  font-family: inherit;
+}
+
+.ascii-buy-votes pre {
+  margin: 0;
+  white-space: pre;
+}
+
+.ascii-buy-votes-tier {
+  margin-bottom: 0;
+}
+
+.ascii-buy-votes-btn {
+  background: transparent;
+  color: var(--foreground);
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.ascii-buy-votes-btn:hover {
+  opacity: 0.7;
+}
+
+.ascii-buy-votes-disclaimers {
+  margin-top: 0.5em;
+  opacity: 0.7;
+  font-size: 0.9em;
+}
+
+.ascii-buy-votes-checkout pre,
+.ascii-buy-votes-success pre {
+  margin: 0;
+}

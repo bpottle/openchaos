@@ -6,6 +6,7 @@ import { PRList } from "@/components/PRList";
 import { Web2Layout } from "@/components/Web2Layout";
 import { HallOfChaos } from "@/components/HallOfChaos";
 import { Web2LoadingSpinner } from "@/components/Web2LoadingSpinner";
+import { BuyVotes } from "@/components/BuyVotes";
 
 export default function Web2Home() {
   return (
@@ -16,6 +17,9 @@ export default function Web2Home() {
         <Suspense fallback={<Web2LoadingSpinner text="Loading PRs..." />}>
           <PRList />
         </Suspense>
+
+        {/* Buy Votes Section */}
+        <BuyVotes />
 
         {/* Hall of Chaos Section */}
         <div className="web2-section">
