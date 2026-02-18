@@ -171,11 +171,11 @@ export function BuyVotes() {
               </p>
               <div className="buy-votes-modal-fake-form">
                 <label>Credit Card Number</label>
-                <input type="text" placeholder="1234 5678 9012 3456" readOnly className="buy-votes-fake-input" />
+                <input type="text" placeholder="1234 5678 9012 3456" className="buy-votes-fake-input" />
                 <label>Expiry</label>
-                <input type="text" placeholder="MM/YY" readOnly className="buy-votes-fake-input buy-votes-fake-input-sm" />
+                <input type="text" placeholder="MM/YY" className="buy-votes-fake-input buy-votes-fake-input-sm" />
                 <label>CVV</label>
-                <input type="text" placeholder="***" readOnly className="buy-votes-fake-input buy-votes-fake-input-sm" />
+                <input type="text" placeholder="***" className="buy-votes-fake-input buy-votes-fake-input-sm" />
               </div>
               <p className="buy-votes-modal-disclaimer">
                 This form is a joke. No payment will be processed. No votes will be added.
