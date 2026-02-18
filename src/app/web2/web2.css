@@ -1167,6 +1167,31 @@ center {
   font-weight: 700;
 }
 
+.pr-card-sponsored-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #888;
+  text-transform: uppercase;
+  margin-top: 3px;
+  opacity: 0.75;
+}
+
+[data-theme="dark"] .pr-card-sponsored-badge {
+  color: #aaa;
+}
+
+.hall-merit-footnote {
+  font-size: 10px;
+  color: #aaa;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+[data-theme="dark"] .hall-merit-footnote {
+  color: #777;
+}
+
 .pr-card-leading-icon {
   margin-top: 4px;
   color: #e67e22;

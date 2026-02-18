@@ -36,6 +36,7 @@ export async function HallOfChaos() {
       {prs.map((pr) => (
         <HallOfChaosCard key={pr.number} pr={pr} />
       ))}
+      <p className="hall-merit-footnote">* Winners listed in order of merit. Merit may include financial contributions.</p>
     </div>
   );
 }

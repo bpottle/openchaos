@@ -200,6 +200,11 @@ export function PRCard({ pr, rank }: PRCardProps) {
             #{pr.number}
           </span>
           {isLeading && (
+            <div className="pr-card-sponsored-badge" title="This PR has been financially accelerated">
+              Sponsored
+            </div>
+          )}
+          {isLeading && (
             <div className="pr-card-leading-icon" title="Currently leading — will be merged next!">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z" />

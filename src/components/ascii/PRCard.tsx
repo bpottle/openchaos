@@ -216,7 +216,7 @@ export function PRCard({ pr, distinguishLeading = true }: PRCardProps) {
         <span>#{!hasConflict ? pr.rank : "N/A"}. </span>
 
         {isLeading && (
-          <span>[LEADING]</span>
+          <span>[LEADING] [SPONSORED]</span>
         )}
         {pr.isTrending && (
           <span>[TRENDING]</span>

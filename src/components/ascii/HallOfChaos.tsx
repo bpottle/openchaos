@@ -38,6 +38,9 @@ export async function HallOfChaos() {
           <HallOfChaosCard pr={pr} />
         </div>
       ))}
+      <div style={{ marginTop: '8px', fontSize: '11px', opacity: 0.6 }}>
+        * Winners listed in order of merit. Merit may include financial contributions.
+      </div>
     </div>
   );
 }
