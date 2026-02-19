@@ -23,7 +23,7 @@ const CLIPPY_TIPS = [
 ];
 
 function getRandomTip(currentIndex: number): number {
-  let newIndex;
+  let newIndex: number;
   do {
     newIndex = Math.floor(Math.random() * CLIPPY_TIPS.length);
   } while (newIndex === currentIndex && CLIPPY_TIPS.length > 1);
@@ -37,9 +37,33 @@ export function Clippy() {
   );
   const [isDismissed, setIsDismissed] = useState(false);
   const [showClippy, setShowClippy] = useState(true);
+  const [alignment, setAlignment] = useState<"left" | "right">("right");
 
   useEffect(() => {
-    // Show after a delay
+    const opposite = (side: "left" | "right") => (side === "left" ? "right" : "left");
+
+    const syncFromRadioDom = () => {
+      const radio = document.querySelector(".gta-radio-container") as HTMLElement | null;
+      const side = radio?.dataset.chaosSide;
+      if (side === "left" || side === "right") {
+        setAlignment(opposite(side));
+      }
+    };
+
+    syncFromRadioDom();
+
+    const handleRadioLayout = (event: Event) => {
+      const customEvent = event as CustomEvent<{ side?: "left" | "right" }>;
+      if (customEvent.detail?.side === "left" || customEvent.detail?.side === "right") {
+        setAlignment(opposite(customEvent.detail.side));
+      }
+    };
+
+    window.addEventListener("openchaos:radio-layout", handleRadioLayout as EventListener);
+    return () => window.removeEventListener("openchaos:radio-layout", handleRadioLayout as EventListener);
+  }, []);
+
+  useEffect(() => {
     const showTimer = setTimeout(() => {
       setIsVisible(true);
     }, 3000);
@@ -48,7 +72,6 @@ export function Clippy() {
   }, []);
 
   useEffect(() => {
-    // Rotate tips periodically
     const tipInterval = setInterval(() => {
       if (!isDismissed && isVisible) {
         setCurrentTip((prev) => getRandomTip(prev));
@@ -59,7 +82,6 @@ export function Clippy() {
   }, [isDismissed, isVisible]);
 
   useEffect(() => {
-    // Always comes back
     if (isDismissed) {
       const comeBackTimer = setTimeout(() => {
         setIsDismissed(false);
@@ -76,7 +98,6 @@ export function Clippy() {
 
   const handleHide = () => {
     setShowClippy(false);
-    // Respects your wishes... for about 30 seconds
     setTimeout(() => {
       setShowClippy(true);
       setIsDismissed(false);
@@ -86,8 +107,14 @@ export function Clippy() {
   if (!showClippy) return null;
 
   return (
-    <div className="web2-chat-widget">
-      {/* Chat Bubble */}
+    <div
+      className={`web2-chat-widget web2-chat-widget-${alignment}`}
+      data-chaos-side={alignment}
+      style={{
+        right: alignment === "right" ? "20px" : undefined,
+        left: alignment === "left" ? "20px" : undefined,
+      }}
+    >
       {isVisible && !isDismissed && (
         <div className="web2-chat-bubble web2-chat-bubble-border">
           <p className="web2-chat-message">
@@ -105,7 +132,6 @@ export function Clippy() {
         </div>
       )}
 
-      {/* Chat Trigger Button */}
       <button
         onClick={() => setIsDismissed(false)}
         className="web2-chat-trigger"
