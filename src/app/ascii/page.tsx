@@ -5,7 +5,7 @@ import { PRList } from "@/components/ascii/PRList";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { HallOfChaos } from "@/components/ascii/HallOfChaos";
 import { AuthButton } from "@/components/AuthButton";
-import { BuyVotes } from "@/components/ascii/BuyVotes";
+// import { BuyVotes } from "@/components/ascii/BuyVotes";
 
 const title = `
   ___                 ___ _
@@ -45,7 +45,7 @@ export default function AsciiHome() {
           </Suspense>
         </div>
 
-        <BuyVotes />
+        {/* <BuyVotes /> */}
 
         <div>
           HALL OF CHAOS - PAST WINNERS
