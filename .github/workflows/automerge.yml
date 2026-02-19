@@ -106,18 +106,18 @@ jobs:
                 commit_message: `Automatically merged PR with ${topPR.votes} net votes (${topPR.upvotes} upvotes, ${topPR.downvotes} downvotes)\nAuthor: @${topPR.author}`
               });
               
-              console.log(`✅ Successfully merged PR #${topPR.number}`);
+              console.log(`Successfully merged PR #${topPR.number}`);
               
               // Add a comment to the PR
               await github.rest.issues.createComment({
                 owner,
                 repo,
                 issue_number: topPR.number,
-                body: `🎉 This PR won the daily vote with **${topPR.votes} net votes** (${topPR.upvotes} 👍, ${topPR.downvotes} 👎) and has been automatically merged!\n\nThanks @${topPR.author} for contributing to the chaos! 🔥`
+                body: `This PR won the daily vote with **${topPR.votes} net votes** (${topPR.upvotes} upvotes, ${topPR.downvotes} downvotes) and has been automatically merged!\n\nThanks @${topPR.author} for contributing to the chaos!`
               });
               
             } catch (error) {
-              console.error(`❌ Failed to merge PR #${topPR.number}: ${error.message}`);
+              console.error(`Failed to merge PR #${topPR.number}: ${error.message}`);
               
               // Try to merge the next eligible PR
               if (mergeablePRs.length > 1) {
@@ -138,17 +138,17 @@ jobs:
                     commit_message: `Automatically merged PR with ${nextPR.votes} net votes (${nextPR.upvotes} upvotes, ${nextPR.downvotes} downvotes)\nAuthor: @${nextPR.author}\n\n(Top PR #${topPR.number} could not be merged)`
                   });
                   
-                  console.log(`✅ Successfully merged fallback PR #${nextPR.number}`);
+                  console.log(`Successfully merged fallback PR #${nextPR.number}`);
                   
                   await github.rest.issues.createComment({
                     owner,
                     repo,
                     issue_number: nextPR.number,
-                    body: `🎉 This PR was automatically merged as the runner-up with **${nextPR.votes} net votes** (${nextPR.upvotes} 👍, ${nextPR.downvotes} 👎).\n\n(The top PR #${topPR.number} could not be merged)\n\nThanks @${nextPR.author} for contributing to the chaos! 🔥`
+                    body: `This PR was automatically merged as the runner-up with **${nextPR.votes} net votes** (${nextPR.upvotes} upvotes, ${nextPR.downvotes} downvotes).\n\n(The top PR #${topPR.number} could not be merged)\n\nThanks @${nextPR.author} for contributing to the chaos!`
                   });
                   
                 } catch (fallbackError) {
-                  console.error(`❌ Failed to merge fallback PR #${nextPR.number}: ${fallbackError.message}`);
+                  console.error(`Failed to merge fallback PR #${nextPR.number}: ${fallbackError.message}`);
                 }
               } else {
                 console.log('No other eligible PRs to try.');
