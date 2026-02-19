@@ -16,160 +16,86 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Merge highest-voted mergeable PR
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get top PR and merge
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const { execSync } = require('child_process');
             const owner = context.repo.owner;
             const repo = context.repo.repo;
-
-            // Helper function to paginate through all items
-            async function paginateAll(apiCall, params) {
-              let allItems = [];
-              let page = 1;
-              const perPage = 100;
-              
-              while (true) {
-                const response = await apiCall({
-                  ...params,
-                  per_page: perPage,
-                  page: page
-                });
-                
-                const items = response.data;
-                if (items.length === 0) break;
-                
-                allItems = allItems.concat(items);
-                
-                if (items.length < perPage) break;
-                page++;
-              }
-              
-              return allItems;
-            }
-
-            // Get all open PRs with pagination
-            console.log('Fetching all open PRs...');
-            const allPRs = await paginateAll(
-              github.rest.pulls.list,
-              { owner, repo, state: 'open' }
-            );
             
-            console.log(`Found ${allPRs.length} open PRs`);
-
-            if (allPRs.length === 0) {
+            console.log('Starting automerge process...');
+            console.log(`Repository: ${owner}/${repo}`);
+            
+            // Run the get-top-pr script that uses the same logic as the website
+            console.log('Fetching PRs using centralized script...');
+            let prs;
+            try {
+              const output = execSync('node scripts/get-top-pr.mjs', {
+                encoding: 'utf-8',
+                env: { ...process.env, GITHUB_TOKEN: process.env.GITHUB_TOKEN }
+              });
+              prs = JSON.parse(output);
+            } catch (error) {
+              console.error('Error fetching PRs:', error.message);
+              console.log('The script ensures pagination, mergeability checks, and rhyming word validation.');
+              return;
+            }
+            
+            console.log(`Found ${prs.length} open PRs`);
+            
+            if (prs.length === 0) {
               console.log('No open PRs found.');
               return;
             }
-
-            // Process each PR to get votes and mergeability
-            const prsWithDetails = await Promise.all(
-              allPRs.map(async (pr) => {
-                try {
-                  // Get all reactions with pagination
-                  const reactions = await paginateAll(
-                    github.rest.reactions.listForIssue,
-                    { owner, repo, issue_number: pr.number }
-                  );
-
-                  const upvotes = reactions.filter(r => r.content === '+1').length;
-                  const downvotes = reactions.filter(r => r.content === '-1').length;
-                  const netVotes = upvotes - downvotes;
-
-                  // Get PR details for mergeability
-                  const prDetail = await github.rest.pulls.get({
-                    owner,
-                    repo,
-                    pull_number: pr.number
-                  });
-
-                  const isMergeable = prDetail.data.mergeable === true;
-                  const isDraft = prDetail.data.draft === true;
-
-                  // Get commit status/checks
-                  let checksPassed = true;
-                  try {
-                    const checks = await github.rest.checks.listForRef({
-                      owner,
-                      repo,
-                      ref: pr.head.sha
-                    });
-                    
-                    if (checks.data.total_count > 0) {
-                      checksPassed = checks.data.check_runs.every(
-                        run => run.status === 'completed' && run.conclusion === 'success'
-                      );
-                    }
-                  } catch (e) {
-                    console.log(`Could not fetch checks for PR #${pr.number}: ${e.message}`);
-                  }
-
-                  return {
-                    number: pr.number,
-                    title: pr.title,
-                    author: pr.user.login,
-                    created_at: pr.created_at,
-                    netVotes,
-                    upvotes,
-                    downvotes,
-                    isMergeable,
-                    checksPassed,
-                    isDraft
-                  };
-                } catch (error) {
-                  console.error(`Error processing PR #${pr.number}: ${error.message}`);
-                  return null;
-                }
-              })
-            );
-
-            // Filter out nulls and invalid PRs
-            const validPRs = prsWithDetails.filter(pr => pr !== null);
-
+            
+            // Filter to mergeable PRs with passing checks (already sorted correctly by script)
+            const mergeablePRs = prs.filter(pr => pr.isMergeable && pr.checksPassed);
+            
             console.log('\n=== PR Status Summary ===');
-            validPRs.forEach(pr => {
-              console.log(`PR #${pr.number}: ${pr.netVotes} votes (${pr.upvotes} up, ${pr.downvotes} down) | Mergeable: ${pr.isMergeable} | CI: ${pr.checksPassed} | Draft: ${pr.isDraft}`);
+            prs.slice(0, 10).forEach(pr => {
+              console.log(
+                `PR #${pr.number} (Rank ${pr.rank}): ${pr.votes} votes ` +
+                `(${pr.upvotes} up, ${pr.downvotes} down) | ` +
+                `Mergeable: ${pr.isMergeable} | CI: ${pr.checksPassed}`
+              );
             });
-
-            // Filter to mergeable PRs with passing checks that aren't drafts
-            const mergeablePRs = validPRs.filter(pr => 
-              pr.isMergeable && 
-              pr.checksPassed && 
-              !pr.isDraft
-            );
-
+            
             console.log(`\n${mergeablePRs.length} PRs are eligible for merge`);
-
+            
             if (mergeablePRs.length === 0) {
-              console.log('No mergeable PRs found. All PRs have conflicts, failing checks, or are drafts.');
+              console.log('No mergeable PRs found. All PRs either:');
+              console.log('  - Have merge conflicts');
+              console.log('  - Have failing CI checks');
+              console.log('  - Missing rhyming words in title');
               return;
             }
-
-            // Sort by net votes (descending), then by creation date (newest first)
-            mergeablePRs.sort((a, b) => {
-              if (b.netVotes !== a.netVotes) {
-                return b.netVotes - a.netVotes;
-              }
-              return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-            });
-
+            
             const topPR = mergeablePRs[0];
-
+            
             console.log('\n=== Merge Decision ===');
             console.log(`Top mergeable PR: #${topPR.number} by @${topPR.author}`);
             console.log(`Title: ${topPR.title}`);
-            console.log(`Net votes: ${topPR.netVotes} (${topPR.upvotes} up, ${topPR.downvotes} down)`);
-            console.log(`Mergeable: ${topPR.isMergeable}`);
-            console.log(`Checks passed: ${topPR.checksPassed}`);
-
-            if (topPR.netVotes <= 0) {
+            console.log(`Net votes: ${topPR.votes} (${topPR.upvotes} up, ${topPR.downvotes} down)`);
+            console.log(`URL: ${topPR.url}`);
+            
+            if (topPR.votes <= 0) {
               console.log('\nTop PR has 0 or negative votes — skipping merge.');
               return;
             }
-
+            
             console.log(`\nAttempting to merge PR #${topPR.number}...`);
-
+            
             try {
               await github.rest.pulls.merge({
                 owner,
@@ -177,26 +103,30 @@ jobs:
                 pull_number: topPR.number,
                 merge_method: 'squash',
                 commit_title: `Merge PR #${topPR.number}: ${topPR.title}`,
-                commit_message: `Automatically merged PR with ${topPR.netVotes} net votes (${topPR.upvotes} upvotes, ${topPR.downvotes} downvotes)\nAuthor: @${topPR.author}`
+                commit_message: `Automatically merged PR with ${topPR.votes} net votes (${topPR.upvotes} upvotes, ${topPR.downvotes} downvotes)\nAuthor: @${topPR.author}`
               });
-
-              console.log(`Successfully merged PR #${topPR.number}`);
-
+              
+              console.log(`✅ Successfully merged PR #${topPR.number}`);
+              
               // Add a comment to the PR
               await github.rest.issues.createComment({
                 owner,
                 repo,
                 issue_number: topPR.number,
-                body: `This PR won the daily vote with ${topPR.netVotes} net votes (${topPR.upvotes} up, ${topPR.downvotes} down) and has been automatically merged.\n\nThanks @${topPR.author} for contributing to the chaos.`
+                body: `🎉 This PR won the daily vote with **${topPR.votes} net votes** (${topPR.upvotes} 👍, ${topPR.downvotes} 👎) and has been automatically merged!\n\nThanks @${topPR.author} for contributing to the chaos! 🔥`
               });
-
-            } catch (error) {
-              console.error(`Failed to merge PR #${topPR.number}: ${error.message}`);
               
-              // Try to find and merge the next eligible PR
+            } catch (error) {
+              console.error(`❌ Failed to merge PR #${topPR.number}: ${error.message}`);
+              
+              // Try to merge the next eligible PR
               if (mergeablePRs.length > 1) {
                 console.log('\nAttempting to merge the next eligible PR...');
                 const nextPR = mergeablePRs[1];
+                
+                console.log(`Next in line: PR #${nextPR.number} by @${nextPR.author}`);
+                console.log(`Title: ${nextPR.title}`);
+                console.log(`Net votes: ${nextPR.votes}`);
                 
                 try {
                   await github.rest.pulls.merge({
@@ -205,12 +135,22 @@ jobs:
                     pull_number: nextPR.number,
                     merge_method: 'squash',
                     commit_title: `Merge PR #${nextPR.number}: ${nextPR.title}`,
-                    commit_message: `Automatically merged PR with ${nextPR.netVotes} net votes\nAuthor: @${nextPR.author}\n\n(Top PR #${topPR.number} could not be merged)`
+                    commit_message: `Automatically merged PR with ${nextPR.votes} net votes (${nextPR.upvotes} upvotes, ${nextPR.downvotes} downvotes)\nAuthor: @${nextPR.author}\n\n(Top PR #${topPR.number} could not be merged)`
                   });
                   
-                  console.log(`Successfully merged fallback PR #${nextPR.number}`);
+                  console.log(`✅ Successfully merged fallback PR #${nextPR.number}`);
+                  
+                  await github.rest.issues.createComment({
+                    owner,
+                    repo,
+                    issue_number: nextPR.number,
+                    body: `🎉 This PR was automatically merged as the runner-up with **${nextPR.votes} net votes** (${nextPR.upvotes} 👍, ${nextPR.downvotes} 👎).\n\n(The top PR #${topPR.number} could not be merged)\n\nThanks @${nextPR.author} for contributing to the chaos! 🔥`
+                  });
+                  
                 } catch (fallbackError) {
-                  console.error(`Failed to merge fallback PR: ${fallbackError.message}`);
+                  console.error(`❌ Failed to merge fallback PR #${nextPR.number}: ${fallbackError.message}`);
                 }
+              } else {
+                console.log('No other eligible PRs to try.');
               }
             }
