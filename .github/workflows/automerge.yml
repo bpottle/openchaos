@@ -63,13 +63,6 @@ jobs:
               return;
             }
 
-            // Helper to check if title has rhyming words (simplified check)
-            function hasRhymingWords(title) {
-              // This is a simplified check - the real check is done via the API
-              // For the workflow, we'll rely on the server-side validation
-              return true;
-            }
-
             // Process each PR to get votes and mergeability
             const prsWithDetails = await Promise.all(
               allPRs.map(async (pr) => {
@@ -122,8 +115,7 @@ jobs:
                     downvotes,
                     isMergeable,
                     checksPassed,
-                    isDraft,
-                    hasRhymes: hasRhymingWords(pr.title)
+                    isDraft
                   };
                 } catch (error) {
                   console.error(`Error processing PR #${pr.number}: ${error.message}`);
@@ -144,14 +136,13 @@ jobs:
             const mergeablePRs = validPRs.filter(pr => 
               pr.isMergeable && 
               pr.checksPassed && 
-              !pr.isDraft &&
-              pr.hasRhymes
+              !pr.isDraft
             );
 
             console.log(`\n${mergeablePRs.length} PRs are eligible for merge`);
 
             if (mergeablePRs.length === 0) {
-              console.log('No mergeable PRs found. All PRs have conflicts, failing checks, are drafts, or lack rhyming titles.');
+              console.log('No mergeable PRs found. All PRs have conflicts, failing checks, or are drafts.');
               return;
             }
 
