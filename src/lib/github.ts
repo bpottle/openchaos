@@ -15,6 +15,8 @@ export interface PullRequest {
   checksPassed: boolean;
   hotScore: number;
   isTrending: boolean;
+  /** Author's self-promo pitch, parsed from <!-- chaos-pitch: ... --> in the PR body */
+  pitch: string | null;
 }
 
 interface PRVotes {
@@ -45,6 +47,7 @@ interface GitHubPR {
   number: number;
   title: string;
   html_url: string;
+  body: string | null;
   user: {
     login: string;
   };
@@ -52,6 +55,19 @@ interface GitHubPR {
   head: {
     sha: string;
   };
+}
+
+/**
+ * Parse an author pitch from a PR body.
+ * Authors embed it as an HTML comment: <!-- chaos-pitch: Your pitch here -->
+ * This is invisible in GitHub's rendered markdown but readable by us.
+ */
+function parsePitch(body: string | null): string | null {
+  if (!body) return null;
+  const match = body.match(/<!--\s*chaos-pitch:\s*([\s\S]*?)\s*-->/i);
+  if (!match) return null;
+  const pitch = match[1].trim();
+  return pitch.length > 0 ? pitch : null;
 }
 
 interface GitHubReaction {
@@ -147,6 +163,7 @@ export async function getOpenPRs(): Promise<PullRequest[]> {
         checksPassed,
         hotScore: calculateHotScore(votes),
         isTrending: false, // Set by getOrganizedPRs based on top 5 hot score
+        pitch: parsePitch(pr.body),
       };
     }),
   );

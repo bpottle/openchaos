@@ -226,6 +226,11 @@ export function PRCard({ pr, rank }: PRCardProps) {
             {" · "}
             <TimeAgo isoDate={pr.createdAt} />
           </div>
+          {pr.pitch && (
+            <div className="pr-card-pitch" title="Author's pitch">
+              💬 <em>{pr.pitch}</em>
+            </div>
+          )}
           <a
             href={url}
             target="_blank"

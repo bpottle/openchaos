@@ -292,6 +292,13 @@ export function PRCard({ pr, distinguishLeading = true }: PRCardProps) {
         · <TimeAgo isoDate={pr.createdAt} />
       </div>
 
+      {/* Pitch: author's self-promo */}
+      {pr.pitch && (
+        <div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&quot;{pr.pitch}&quot;
+        </div>
+      )}
+
       {/* Line 3: link */}
       <div>
       &nbsp;&nbsp;&nbsp;&nbsp;<a
