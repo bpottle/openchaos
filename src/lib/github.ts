@@ -61,13 +61,23 @@ interface GitHubPR {
  * Parse an author pitch from a PR body.
  * Authors embed it as an HTML comment: <!-- chaos-pitch: Your pitch here -->
  * This is invisible in GitHub's rendered markdown but readable by us.
+ * 
+ * Pitches are truncated to 256 characters to prevent overflow or site-breaking content.
  */
 function parsePitch(body: string | null): string | null {
   if (!body) return null;
   const match = body.match(/<!--\s*chaos-pitch:\s*([\s\S]*?)\s*-->/i);
   if (!match) return null;
   const pitch = match[1].trim();
-  return pitch.length > 0 ? pitch : null;
+  if (pitch.length === 0) return null;
+  
+  // Truncate to 256 characters to prevent overflow/site-breaking pitches
+  const MAX_PITCH_LENGTH = 256;
+  if (pitch.length > MAX_PITCH_LENGTH) {
+    return pitch.substring(0, MAX_PITCH_LENGTH).trim() + '…';
+  }
+  
+  return pitch;
 }
 
 interface GitHubReaction {
