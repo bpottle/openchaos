@@ -16,6 +16,21 @@ A self-evolving open source project. Each day, the community votes on PRs, and t
 4. Vercel auto-deploys
 5. Repeat forever
 
+## Submitting a PR
+
+When creating your PR, you can include an **optional pitch** — a short message to persuade voters why your change should win. Add it as an HTML comment in the PR body (it won't be visible in GitHub's rendered view, but will appear on the OpenChaos website):
+
+```markdown
+<!-- chaos-pitch: Your compelling pitch here -->
+```
+
+**Example:**
+```markdown
+<!-- chaos-pitch: Adds dark mode toggle — finally no more burning retinas at 3am! -->
+```
+
+Your pitch will be displayed on your PR card. Keep it concise (max 256 characters) and make it count!
+
 ## Rules
 
 - **Vote**: Add a 👍 reaction to support a change, or a 👎 reaction to oppose it
@@ -25,7 +40,7 @@ A self-evolving open source project. Each day, the community votes on PRs, and t
 - **CI must pass**: If the build fails, the PR is not eligible
 - **No merge conflicts**: PRs with conflicts at merge time are skipped; the next highest PR wins
 - **No malware**: Maintainer can reject obviously malicious content
-- Any time the maintainer pushes code to main without following the community voting process indicated above, he must post to his X account "I'm a naughty boy" with a link to the Github commit page. 
+- Any time the maintainer pushes code to main without following the community voting process indicated above, he must post to his X account "I'm a naughty boy" with a link to the Github commit page.
 
 ## What Can Be Changed
 
