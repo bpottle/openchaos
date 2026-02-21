@@ -2265,6 +2265,11 @@ center {
   font-family: 'Lucida Grande', 'Trebuchet MS', 'Helvetica Neue', Arial, sans-serif;
 }
 
+.web2-chat-widget-left {
+  right: auto;
+  left: 20px;
+}
+
 .web2-chat-bubble {
   position: absolute;
   bottom: 60px;
@@ -2283,6 +2288,11 @@ center {
   border-color: #444;
 }
 
+.web2-chat-widget-left .web2-chat-bubble {
+  right: auto;
+  left: 0;
+}
+
 .web2-chat-bubble::after {
   content: '';
   position: absolute;
@@ -2299,6 +2309,11 @@ center {
   border-top-color: #2a2a2a;
 }
 
+.web2-chat-widget-left .web2-chat-bubble::after {
+  right: auto;
+  left: 24px;
+}
+
 .web2-chat-bubble-border::before {
   content: '';
   position: absolute;
@@ -2313,6 +2328,11 @@ center {
 
 [data-theme="dark"] .web2-chat-bubble-border::before {
   border-top-color: #444;
+}
+
+.web2-chat-widget-left .web2-chat-bubble-border::before {
+  right: auto;
+  left: 23px;
 }
 
 .web2-chat-message {
